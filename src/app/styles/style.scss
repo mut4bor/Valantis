@@ -1,0 +1,18 @@
+@import 'shared/vars';
+
+body {
+  background: $backgroundColor;
+  color: $whiteColor;
+}
+
+::-webkit-scrollbar {
+  width: $scrollBarWidth;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: $scrollBarBgColor;
+  border-radius: 5px;
+  &:hover {
+    background-color: $scrollBarHoverBgColor;
+  }
+}

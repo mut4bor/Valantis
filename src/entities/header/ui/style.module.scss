@@ -1,0 +1,41 @@
+@import 'shared/vars';
+
+@media (min-width: $bp-320) {
+  .header {
+    width: 100%;
+    height: 50px;
+    z-index: 1;
+    background: $darkGrayColor;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $whiteColor;
+    font-size: 0.7rem;
+    border-bottom: $darkGrayColor solid 0.1px;
+    padding-right: 8px;
+  }
+  .container {
+    max-width: 800px;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0px 8px 0;
+  }
+  .titleWrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 100%;
+  }
+  .titleImg {
+    width: 30px;
+    aspect-ratio: 1;
+    margin-right: 8px;
+  }
+  .title {
+    font-weight: 500;
+  }
+}
