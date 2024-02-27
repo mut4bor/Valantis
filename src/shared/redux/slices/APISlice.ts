@@ -2,12 +2,25 @@ import { API_URL, API_AUTH_TOKEN } from 'shared/config';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import md5 from 'md5';
 
-interface FilterParams {
-  price: number;
-}
-
-interface FilterResponse {
+interface Response {
   result: string[];
+}
+interface FilterParams {
+  brand?: string | null;
+  price?: number;
+  product?: string;
+}
+interface GetIdsParams {
+  offset?: number;
+  limit?: number;
+}
+interface GetItemsParams {
+  ids: string[];
+}
+interface GetFieldsParams {
+  field: string;
+  offset?: number;
+  limit?: number;
 }
 
 const generateAuthString = (password: string): string => {
@@ -24,20 +37,59 @@ const productApi = createApi({
       return headers;
     },
   }),
+
   endpoints: (builder) => ({
-    filter: builder.query<FilterResponse, FilterParams>({
+    filter: builder.query<Response, FilterParams>({
+      query: (params) => ({
+        url: '/',
+        method: 'POST',
+        body: {
+          action: 'filter',
+          params: params,
+        },
+      }),
+    }),
+
+    getIds: builder.query<Response, GetIdsParams | void>({
       query: (params) => ({
         url: '/',
         method: 'POST',
         body: {
           action: 'get_ids',
-          params: {},
+          params: params,
+        },
+      }),
+    }),
+
+    getItems: builder.query<Response, GetItemsParams>({
+      query: (params) => ({
+        url: '/',
+        method: 'POST',
+        body: {
+          action: 'get_items',
+          params: params,
+        },
+      }),
+    }),
+
+    getFields: builder.query<Response, GetFieldsParams>({
+      query: (params) => ({
+        url: '/',
+        method: 'POST',
+        body: {
+          action: 'get_fields',
+          params: params,
         },
       }),
     }),
   }),
 });
 
-export const { useFilterQuery } = productApi;
+export const {
+  useFilterQuery,
+  useGetIdsQuery,
+  useGetFieldsQuery,
+  useGetItemsQuery,
+} = productApi;
 
 export default productApi;
