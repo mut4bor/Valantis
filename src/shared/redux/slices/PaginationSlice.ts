@@ -12,9 +12,7 @@ const paginationSlice = createSlice({
       state.value++;
     },
     decrement(state) {
-      if (state.value > 1) {
-        state.value--;
-      }
+      state.value > 1 && state.value--;
     },
   },
 });

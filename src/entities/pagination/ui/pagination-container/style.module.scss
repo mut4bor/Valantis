@@ -1,0 +1,9 @@
+@import 'shared/vars';
+
+.container {
+  background: $backgroundColor;
+  display: flex;
+  width: 100px;
+  height: 28px;
+  border-radius: 3px;
+}

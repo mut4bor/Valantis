@@ -2,8 +2,15 @@ import { API_URL, API_AUTH_TOKEN } from 'shared/config';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import md5 from 'md5';
 
-interface Response {
-  result: string[];
+// interface Response {
+//   result: string[];
+// }
+
+interface ItemsResponse {
+  brand: string | null;
+  id: string;
+  price: number;
+  product: string;
 }
 interface FilterParams {
   brand?: string | null;
@@ -15,7 +22,7 @@ interface GetIdsParams {
   limit?: number;
 }
 interface GetItemsParams {
-  ids: string[];
+  ids: string[] | null;
 }
 interface GetFieldsParams {
   field: string;
@@ -39,7 +46,7 @@ const productApi = createApi({
   }),
 
   endpoints: (builder) => ({
-    filter: builder.query<Response, FilterParams>({
+    filter: builder.query<string[], FilterParams>({
       query: (params) => ({
         url: '/',
         method: 'POST',
@@ -50,7 +57,7 @@ const productApi = createApi({
       }),
     }),
 
-    getIds: builder.query<Response, GetIdsParams | void>({
+    getIds: builder.query<string[], GetIdsParams | void>({
       query: (params) => ({
         url: '/',
         method: 'POST',
@@ -61,7 +68,7 @@ const productApi = createApi({
       }),
     }),
 
-    getItems: builder.query<Response, GetItemsParams>({
+    getItems: builder.query<ItemsResponse[], GetItemsParams>({
       query: (params) => ({
         url: '/',
         method: 'POST',
@@ -72,7 +79,7 @@ const productApi = createApi({
       }),
     }),
 
-    getFields: builder.query<Response, GetFieldsParams>({
+    getFields: builder.query<string[], GetFieldsParams>({
       query: (params) => ({
         url: '/',
         method: 'POST',

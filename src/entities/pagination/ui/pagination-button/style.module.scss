@@ -1,0 +1,29 @@
+@import 'shared/vars';
+
+.button {
+  width: 29%;
+  height: 100%;
+  background: transparent;
+  padding: 4px;
+  transition: 0.1s;
+  &.disabled:hover {
+    cursor: not-allowed;
+  }
+  &:hover:not(.disabled) {
+    background: #1b1b1b;
+  }
+}
+.svg {
+  height: 100%;
+  aspect-ratio: 1;
+}
+.use {
+  fill: $whiteColor;
+  transition: 0.1s;
+}
+.inverted {
+  transform: rotate(180deg);
+}
+.disabled {
+  fill: $darkGrayColor;
+}
