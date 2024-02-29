@@ -6,11 +6,16 @@
   background: transparent;
   padding: 4px;
   transition: 0.1s;
-  &.disabled:hover {
-    cursor: not-allowed;
+  &.disabled {
+    use {
+      fill: $darkGrayColor;
+    }
+    &:hover {
+      cursor: not-allowed;
+    }
   }
   &:hover:not(.disabled) {
-    background: #1b1b1b;
+    background: $darkGrayColor;
   }
 }
 .svg {
@@ -23,7 +28,4 @@
 }
 .inverted {
   transform: rotate(180deg);
-}
-.disabled {
-  fill: $darkGrayColor;
 }

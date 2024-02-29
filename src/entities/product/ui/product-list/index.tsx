@@ -1,4 +1,7 @@
 import styled from './style.module.scss';
+import _ from 'lodash';
+import { ProductCard } from '../product-card';
+import { ProductCardContainer } from '../product-card-container';
 import {
   useFilterQuery,
   useGetIdsQuery,
@@ -6,49 +9,65 @@ import {
   useGetFieldsQuery,
 } from 'shared/redux/slices/APISlice';
 import { useEffect } from 'react';
-
-interface GetItemsParams {
-  ids: string[] | null;
-}
+import { useAppSelector } from 'shared/redux/hooks';
 
 export function ProductList() {
+  const PaginationValue = useAppSelector((state) => state.pagination.value);
+
   const {
     data: idsData,
     error: idsError,
     isLoading: idsIsLoading,
     refetch: idsRefetch,
-  } = useGetIdsQuery();
+  } = useGetIdsQuery({ offset: (PaginationValue - 1) * 50, limit: 50 });
 
-  const idsArray = idsData ? Object.values(idsData.slice(0, 50)) : null;
-  const params: GetItemsParams = { ids: idsArray };
+  const filteredIdsData = _.uniq(idsData?.result);
 
   const {
     data: itemsData,
     error: itemsError,
     isLoading: itemsIsLoading,
     refetch: itemsRefetch,
-  } = useGetItemsQuery(params);
+  } = useGetItemsQuery({ ids: filteredIdsData });
+
+  const filteredItemsData = _.uniqBy(
+    itemsData?.result,
+    (itemData) => itemData.id
+  );
+
+  const productQueries = useAppSelector((state) => state.productApi.queries);
+  const dataStatus = Object.values(productQueries).slice(-1)[0]?.status;
 
   useEffect(() => {
-    console.log(idsData);
-    if (itemsData) {
-      console.log(Object.values(itemsData)[0]);
-    }
-  }, [idsData, itemsData]);
-  if (!itemsData) {
-    return <div></div>;
-  }
+    console.log(itemsIsLoading);
+    console.log(idsIsLoading);
+  }, [idsData, itemsData, PaginationValue]);
   return (
     <>
-      {itemsData && (
+      <div className="">
         <>
-          <div className="">
-            {/* {Object.values(itemsData).map((data) => {
-              return <div key={data.id + data.price}>{data.id}</div>;
-            })} */}
-          </div>
+          {!idsIsLoading && !itemsIsLoading && filteredItemsData ? (
+            filteredItemsData.map((data, index) => (
+              <ProductCardContainer key={index}>
+                {dataStatus === 'fulfilled' && (
+                  <ProductCard
+                    data={{
+                      id: data.id,
+                      name: data.product,
+                      price: data.price,
+                      brand: data.brand,
+                    }}
+                  />
+                )}
+              </ProductCardContainer>
+            ))
+          ) : (
+            <ProductCardContainer>
+              <div className="loading-text">Загрузка</div>
+            </ProductCardContainer>
+          )}
         </>
-      )}
+      </div>
     </>
   );
 }

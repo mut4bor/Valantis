@@ -9,6 +9,8 @@ const getEnvVar = (key: string) => {
   return process.env[key] || '';
 };
 
+export const BASE_URL = getEnvVar('REACT_APP_BASE_URL');
+
 export const API_URL = getEnvVar('REACT_APP_API_URL');
 
 export const API_AUTH_TOKEN = getEnvVar('REACT_APP_AUTH_TOKEN');
