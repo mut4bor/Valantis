@@ -7,5 +7,5 @@ export type ProductCardProps = {
   };
 };
 export type ProductCardContainerProps = {
-  children: React.ReactNode;
+  children?: React.ReactNode;
 };

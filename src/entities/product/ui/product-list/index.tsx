@@ -1,19 +1,13 @@
 import _ from 'lodash';
 import { ProductCard } from '../product-card';
 import { ProductCardContainer } from '../product-card-container';
-import {
-  useFilterQuery,
-  useGetIdsQuery,
-  useGetItemsQuery,
-  useGetFieldsQuery,
-} from 'shared/redux/slices/APISlice';
+import { useGetIdsQuery, useGetItemsQuery } from 'shared/redux/slices/APISlice'; // Подставьте правильный путь к вашим RTK Query
 import { useEffect } from 'react';
 import { useAppSelector, useAppDispatch } from 'shared/redux/hooks';
 
 export function ProductList() {
   const PaginationValue = useAppSelector((state) => state.pagination.value);
-  const productQueries = useAppSelector((state) => state.productApi.queries);
-  const dataStatus = Object.values(productQueries).slice(-1)[0]?.status;
+
   const productsToShow = useAppSelector(
     (state) => state.pagination.productsToShow
   );
@@ -45,13 +39,23 @@ export function ProductList() {
   useEffect(() => {
     console.log(itemsIsLoading);
     console.log(idsIsLoading);
-  }, [idsData, itemsData, PaginationValue]);
+  }, [itemsIsLoading, idsIsLoading]);
+
+  useEffect(() => {
+    if (idsError) idsRefetch();
+    if (itemsError) itemsRefetch();
+  }, [idsError, itemsError, idsRefetch, itemsRefetch]);
+
   return (
     <>
-      {!idsIsLoading && !itemsIsLoading && filteredItemsData ? (
-        filteredItemsData.map((data, index) => (
-          <ProductCardContainer key={index}>
-            {dataStatus === 'fulfilled' && (
+      {idsIsLoading || itemsIsLoading
+        ? [...Array(50)].map((_, index) => (
+            <ProductCardContainer key={index}>
+              <ProductCard />
+            </ProductCardContainer>
+          ))
+        : filteredItemsData.map((data, index) => (
+            <ProductCardContainer key={index}>
               <ProductCard
                 data={{
                   id: data.id,
@@ -60,14 +64,8 @@ export function ProductList() {
                   brand: data.brand,
                 }}
               />
-            )}
-          </ProductCardContainer>
-        ))
-      ) : (
-        <ProductCardContainer>
-          <div className="loading-text">Загрузка</div>
-        </ProductCardContainer>
-      )}
+            </ProductCardContainer>
+          ))}
     </>
   );
 }

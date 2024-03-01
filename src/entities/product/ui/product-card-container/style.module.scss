@@ -1,6 +1,9 @@
 @import 'shared/vars';
 
 .container {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
   background: $darkGrayColor;
   padding: 10px;
   margin: 10px;

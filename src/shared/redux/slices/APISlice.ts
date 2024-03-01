@@ -17,6 +17,7 @@ const generateAuthString = (password: string): string => {
 
 const productApi = createApi({
   reducerPath: 'productApi',
+
   baseQuery: fetchBaseQuery({
     baseUrl: API_URL,
     prepareHeaders: (headers) => {
@@ -24,6 +25,7 @@ const productApi = createApi({
       return headers;
     },
   }),
+
   endpoints: (builder) => ({
     filter: builder.query<Response, FilterParams>({
       query: (params) => ({

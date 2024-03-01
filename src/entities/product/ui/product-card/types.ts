@@ -1,5 +1,5 @@
 export type ProductCardProps = {
-  data: {
+  data?: {
     id: string;
     name: string;
     price: number;

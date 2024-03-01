@@ -1,14 +1,10 @@
 import styled from './style.module.scss';
 
-type PaginationButtonProps = {
+type PaginationContainerProps = {
   children: React.ReactNode;
 };
 
-export function PaginationContainer(props: PaginationButtonProps) {
+export function PaginationContainer(props: PaginationContainerProps) {
   const { children } = props;
-  return (
-    <>
-      <div className={styled.container}>{children}</div>
-    </>
-  );
+  return <div className={styled.container}>{children}</div>;
 }
