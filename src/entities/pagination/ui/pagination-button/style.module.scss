@@ -6,7 +6,7 @@
   background: transparent;
   padding: 4px;
   transition: 0.1s;
-  &.disabled {
+  &:disabled {
     use {
       fill: $darkGrayColor;
     }
@@ -14,7 +14,7 @@
       cursor: not-allowed;
     }
   }
-  &:hover:not(.disabled) {
+  &:hover:not(:disabled) {
     background: $darkGrayColor;
   }
 }

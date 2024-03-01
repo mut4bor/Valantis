@@ -23,6 +23,8 @@ export interface GetIdsParams {
 }
 export interface GetItemsParams {
   ids: string[] | undefined;
+  offset?: number;
+  limit?: number;
 }
 export interface GetFieldsParams {
   field: string;
