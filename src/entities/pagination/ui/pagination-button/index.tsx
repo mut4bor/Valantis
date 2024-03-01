@@ -21,6 +21,9 @@ export function PaginationButton(props: PaginationButtonProps) {
   const paginationMaxValue = useAppSelector(
     (state) => state.pagination.maxValue
   );
+  const productsToShow = useAppSelector(
+    (state) => state.pagination.productsToShow
+  );
   const productQueries = useAppSelector((state) => state.productApi.queries);
   const dataStatus = Object.values(productQueries).slice(-1)[0]?.status;
 
@@ -34,8 +37,10 @@ export function PaginationButton(props: PaginationButtonProps) {
   const filteredAllIdsData = _.uniq(allIdsData?.result);
 
   useEffect(() => {
-    dispatch(maxValueChanged(Math.ceil(filteredAllIdsData.length / 50)));
-  }, [filteredAllIdsData, dispatch]);
+    dispatch(
+      maxValueChanged(Math.ceil(filteredAllIdsData.length / productsToShow))
+    );
+  }, [filteredAllIdsData]);
 
   return (
     <>

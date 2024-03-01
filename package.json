@@ -55,6 +55,7 @@
     ]
   },
   "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@types/lodash": "^4.14.202",
     "@types/md5": "^2.3.5",
     "eslint-config-prettier": "^9.1.0"
