@@ -12,7 +12,7 @@
     color: $whiteColor;
     font-size: 0.7rem;
     border-bottom: $darkGrayColor solid 0.1px;
-    padding-right: 8px;
+    padding-right: $scrollBarWidth;
   }
   .container {
     max-width: 800px;
@@ -22,7 +22,7 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    padding: 8px 0px 8px 0;
+    padding: 8px 10px;
   }
   .titleWrapper {
     display: flex;

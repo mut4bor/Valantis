@@ -14,8 +14,10 @@
       cursor: not-allowed;
     }
   }
-  &:hover:not(:disabled) {
-    background: $darkGrayColor;
+  @media (hover: hover) {
+    &:hover:not(:disabled) {
+      background: $darkGrayColor;
+    }
   }
 }
 .svg {
