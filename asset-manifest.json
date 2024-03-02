@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/Valantis/static/css/main.9b2052c0.css",
+    "main.css": "/Valantis/static/css/main.ba9dbdae.css",
     "main.js": "/Valantis/static/js/main.5c9523ba.js",
     "static/js/453.68693753.chunk.js": "/Valantis/static/js/453.68693753.chunk.js",
     "static/media/roboto-latin-500-normal.woff2": "/Valantis/static/media/roboto-latin-500-normal.f25d774ecfe0996f8eb5.woff2",
@@ -61,12 +61,12 @@
     "static/media/roboto-greek-ext-400-normal.woff": "/Valantis/static/media/roboto-greek-ext-400-normal.f708607d2a7290fb8bfa.woff",
     "static/media/roboto-greek-ext-700-normal.woff": "/Valantis/static/media/roboto-greek-ext-700-normal.249853776d22a271b2b5.woff",
     "index.html": "/Valantis/index.html",
-    "main.9b2052c0.css.map": "/Valantis/static/css/main.9b2052c0.css.map",
+    "main.ba9dbdae.css.map": "/Valantis/static/css/main.ba9dbdae.css.map",
     "main.5c9523ba.js.map": "/Valantis/static/js/main.5c9523ba.js.map",
     "453.68693753.chunk.js.map": "/Valantis/static/js/453.68693753.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.9b2052c0.css",
+    "static/css/main.ba9dbdae.css",
     "static/js/main.5c9523ba.js"
   ]
 }
