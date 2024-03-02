@@ -4,19 +4,22 @@ import { ProductCardContainer } from '../product-card-container';
 import { useGetIdsQuery, useGetItemsQuery } from 'shared/redux/slices/APISlice'; // Подставьте правильный путь к вашим RTK Query
 import { useEffect } from 'react';
 import { useAppSelector, useAppDispatch } from 'shared/redux/hooks';
+import { isDisabledChanged } from 'shared/redux/slices/PaginationSlice';
 
 export function ProductList() {
+  const dispatch = useAppDispatch();
+
   const PaginationValue = useAppSelector((state) => state.pagination.value);
 
   const productsToShow = useAppSelector(
-    (state) => state.pagination.productsToShow
+    (state) => state.settings.productsToShow
   );
 
   const {
     data: idsData,
     error: idsError,
-    isLoading: idsIsLoading,
     refetch: idsRefetch,
+    isFetching: idsIsFetching,
   } = useGetIdsQuery({
     offset: (PaginationValue - 1) * productsToShow,
     limit: productsToShow,
@@ -27,8 +30,8 @@ export function ProductList() {
   const {
     data: itemsData,
     error: itemsError,
-    isLoading: itemsIsLoading,
     refetch: itemsRefetch,
+    isFetching: itemsIsFetching,
   } = useGetItemsQuery({ ids: filteredIdsData });
 
   const filteredItemsData = _.uniqBy(
@@ -37,18 +40,21 @@ export function ProductList() {
   );
 
   useEffect(() => {
-    console.log(itemsIsLoading);
-    console.log(idsIsLoading);
-  }, [itemsIsLoading, idsIsLoading]);
-
-  useEffect(() => {
     if (idsError) idsRefetch();
     if (itemsError) itemsRefetch();
   }, [idsError, itemsError, idsRefetch, itemsRefetch]);
 
+  const isFetching = (): boolean => {
+    return idsIsFetching || itemsIsFetching;
+  };
+
+  useEffect(() => {
+    dispatch(isDisabledChanged(isFetching()));
+  }, [idsIsFetching, itemsIsFetching]);
+
   return (
     <>
-      {idsIsLoading || itemsIsLoading
+      {isFetching()
         ? [...Array(50)].map((_, index) => (
             <ProductCardContainer key={index}>
               <ProductCard />

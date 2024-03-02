@@ -7,7 +7,7 @@ const paginationSlice = createSlice({
     value: 1,
     minValue: 1,
     maxValue: 100,
-    productsToShow: 50,
+    isDisabled: true,
   },
 
   reducers: {
@@ -20,9 +20,12 @@ const paginationSlice = createSlice({
     maxValueChanged(state, action) {
       state.maxValue = action.payload;
     },
+    isDisabledChanged(state, action) {
+      state.isDisabled = action.payload;
+    },
   },
 });
 
-export const { increment, decrement, maxValueChanged } =
+export const { increment, decrement, maxValueChanged, isDisabledChanged } =
   paginationSlice.actions;
 export default paginationSlice.reducer;

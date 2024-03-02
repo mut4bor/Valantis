@@ -18,7 +18,7 @@ export const useIdsLogic = (): void => {
   allIdsError && allIdsRefetch();
 
   const productsToShow = useAppSelector(
-    (state) => state.pagination.productsToShow
+    (state) => state.settings.productsToShow
   );
 
   useEffect(() => {

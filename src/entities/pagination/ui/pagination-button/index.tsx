@@ -3,7 +3,6 @@ import { increment, decrement } from 'shared/redux/slices/PaginationSlice';
 import SVG from 'shared/SVG';
 import styled from './style.module.scss';
 import { useIdsLogic } from 'shared/useIdsLogic';
-import { useEffect } from 'react';
 
 type PaginationButtonProps = {
   buttonType: 'increment' | 'decrement';
@@ -21,8 +20,9 @@ export function PaginationButton(props: PaginationButtonProps) {
   const paginationMaxValue = useAppSelector(
     (state) => state.pagination.maxValue
   );
-  const productQueries = useAppSelector((state) => state.productApi.queries);
-  const dataStatus = Object.values(productQueries).slice(-1)[0]?.status;
+  const paginationIsDisabledChanged = useAppSelector(
+    (state) => state.pagination.isDisabled
+  );
 
   return (
     <button
@@ -35,10 +35,9 @@ export function PaginationButton(props: PaginationButtonProps) {
       }
       className={styled.button}
       onClick={() => {
-        dataStatus === 'fulfilled' &&
-          (buttonType === 'increment'
-            ? dispatch(increment())
-            : dispatch(decrement()));
+        buttonType === 'increment'
+          ? !paginationIsDisabledChanged && dispatch(increment())
+          : dispatch(decrement());
       }}
     >
       <SVG
