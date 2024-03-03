@@ -1,0 +1,11 @@
+@import 'shared/vars';
+
+.input {
+  background: transparent;
+  font-size: 1.4rem;
+  border-radius: 0.5rem;
+  color: $whiteColor;
+  width: 47.5%;
+  border: 0.1rem $whiteColor solid;
+  padding: 0.5rem;
+}

@@ -2,9 +2,9 @@ import _ from 'lodash';
 import { useEffect } from 'react';
 import { useGetFieldsQuery } from 'shared/api/redux/slices/APISlice';
 
-export const useGetAllBrands = (): string[] => {
+export const useGetAllPrices = (): string[] => {
   const { data, isError, refetch } = useGetFieldsQuery({
-    field: 'brand',
+    field: 'price',
   });
 
   useEffect(() => {

@@ -3,14 +3,14 @@ import { SidebarContainerProps } from './types';
 import { SVG } from 'shared/ui';
 
 export function SidebarTitle(props: SidebarContainerProps) {
-  const { title, onClick } = props;
+  const { title, onClick, active } = props;
 
   return (
     <>
       <button type="button" className={styled.title} onClick={onClick}>
         <SVG
           href="#arrow"
-          svgClassName={styled.svg}
+          svgClassName={`${active ? styled.active : ''} ${styled.svg}`}
           useClassName={styled.use}
         />
         {title}

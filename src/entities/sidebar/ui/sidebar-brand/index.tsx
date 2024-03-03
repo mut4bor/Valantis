@@ -2,8 +2,6 @@ import styled from './style.module.scss';
 import { SidebarBrandProps } from './types';
 import { Checkbox } from 'shared/ui';
 import { useGetAllBrands } from 'shared/hooks/useGetAllBrands';
-import { useEffect } from 'react';
-import { useGetFieldsQuery } from 'shared/api/redux/slices/APISlice';
 import _ from 'lodash';
 
 export function SidebarBrand(props: SidebarBrandProps) {

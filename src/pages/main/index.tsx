@@ -6,10 +6,10 @@ import {
 } from 'shared/ui';
 import { useAppDispatch, useAppSelector } from 'shared/api/redux/hooks';
 import { ProductList } from 'entities/product';
-import { SidebarBrand, SidebarTitle, SidebarContainer } from 'entities/sidebar';
 
 import { useIdsLogic } from 'shared/hooks/useIdsLogic';
 import { increment, decrement } from 'shared/api/redux/slices/PaginationSlice';
+import { SidebarList } from 'entities/sidebar';
 
 export function MainPage() {
   const dispatch = useAppDispatch();
@@ -25,17 +25,8 @@ export function MainPage() {
   return (
     <div className={styled.container}>
       <div className={styled.sidebarWrapper}>
-        <SidebarContainer>
-          <SidebarTitle
-            title="title"
-            onClick={() => {
-              return;
-            }}
-          />
-          <SidebarBrand active={true} />
-        </SidebarContainer>
+        <SidebarList />
       </div>
-
       <div className={styled.mainWrapper}>
         <PaginationContainer>
           <PaginationButton
