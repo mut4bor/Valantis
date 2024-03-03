@@ -1,93 +1,92 @@
 * {
-	padding: 0;
-	margin: 0;
-	border: 0;
-	box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  box-sizing: border-box;
 }
 
 *,
 *::after,
 *::before {
-	-moz-box-sizing: border-box;
-	-webkit-box-sizing: border-box;
-	box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 :active,
 :focus {
-	outline: none;
+  outline: none;
 }
 
 a:active,
 a:focus {
-	outline: none;
+  outline: none;
 }
 
 aside,
 footer,
 header,
 nav {
-	display: block;
+  display: block;
 }
 
 body,
 html {
-	color: #333;
-	margin: 0;
-	padding: 0;
-	border: 0;
-	outline: 0;
-	width: 100%;
-	height: 100%;
-	font-size: 100%;
-	line-height: 1;
-	background-size: 100%;
-	font-size: 14px;
+  color: #333;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  width: 100%;
+  height: 100%;
+  line-height: 1;
+  background-size: 100%;
+  font-size: 62.5%;
 }
 
 button,
 input,
 textarea {
-	font-family: inherit;
+  font-family: inherit;
 }
 
 input::-ms-clear {
-	display: none;
+  display: none;
 }
 
 input {
-	outline: 0;
+  outline: 0;
 }
 
 button {
-	cursor: pointer;
+  cursor: pointer;
 }
 
 button::-moz-focus-inner {
-	padding: 0;
-	border: 0;
+  padding: 0;
+  border: 0;
 }
 
 a,
 a:visited {
-	text-decoration: none;
+  text-decoration: none;
 }
 
 a:hover {
-	text-decoration: none;
+  text-decoration: none;
 }
 
 hr {
-	height: 1px;
-	width: 100%;
-	background: #dddddd;
+  height: 1px;
+  width: 100%;
+  background: #dddddd;
 }
 
 ul,
 li {
-	list-style: none;
+  list-style: none;
 }
 
 label {
-	width: fit-content;
+  width: fit-content;
 }

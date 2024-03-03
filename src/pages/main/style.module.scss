@@ -1,11 +1,21 @@
 @import 'shared/vars';
 
-@media (min-width: $bp-320) {
-  .container {
-    max-width: 800px;
-    width: 100%;
-    margin: 40px auto;
-    border-radius: 5px;
-    padding: 10px;
-  }
+.container {
+  display: flex;
+  flex-direction: row;
+  gap: 2%;
+  max-width: $containerWidth;
+  width: 100%;
+  margin: 4rem auto;
+  border-radius: 0.5rem;
+  padding: 1rem;
+}
+.sidebarWrapper {
+  width: 23%;
+  background: $darkGrayColor;
+  border-radius: 0.5rem;
+  height: fit-content;
+}
+.mainWrapper {
+  width: 75%;
 }

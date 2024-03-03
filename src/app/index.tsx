@@ -8,11 +8,9 @@ import { Suspense } from 'react';
 
 function App() {
   return (
-    <>
-      <Suspense fallback={'Loading...'}>
-        <Routing />
-      </Suspense>
-    </>
+    <Suspense fallback={'Loading...'}>
+      <Routing />
+    </Suspense>
   );
 }
 

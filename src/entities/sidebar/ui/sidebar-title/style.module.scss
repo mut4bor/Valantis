@@ -1,0 +1,26 @@
+@import 'shared/vars';
+
+.title {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 2rem;
+  height: 3rem;
+  font-size: 2rem;
+  background: transparent;
+  width: 100%;
+  color: $whiteColor;
+}
+.svg {
+  height: 1.5rem;
+  aspect-ratio: 1;
+  transform: rotate(90deg);
+  transition: 0.1s;
+  &.active {
+    transform: rotate(270deg);
+  }
+}
+.use {
+  fill: $whiteColor;
+  transition: 0.1s;
+}

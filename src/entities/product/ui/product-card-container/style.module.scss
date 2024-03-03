@@ -3,9 +3,9 @@
 .container {
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 0.5rem;
   background: $darkGrayColor;
   padding: 10px;
-  margin: 10px 0;
-  border-radius: 5px;
+  margin: 1rem 0;
+  border-radius: 0.5rem;
 }

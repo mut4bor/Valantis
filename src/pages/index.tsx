@@ -1,14 +1,12 @@
-import { store } from 'shared/redux/store';
+import { store } from 'shared/api/redux/store';
 import { Provider } from 'react-redux';
 import { Header } from 'entities/header/ui';
 import { MainPage } from './main';
 export const Routing = () => {
   return (
-    <>
-      <Provider store={store}>
-        <Header />
-        <MainPage />
-      </Provider>
-    </>
+    <Provider store={store}>
+      <Header />
+      <MainPage />
+    </Provider>
   );
 };

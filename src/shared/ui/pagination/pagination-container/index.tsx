@@ -1,8 +1,5 @@
 import styled from './style.module.scss';
-
-type PaginationContainerProps = {
-  children: React.ReactNode;
-};
+import { PaginationContainerProps } from './types';
 
 export function PaginationContainer(props: PaginationContainerProps) {
   const { children } = props;

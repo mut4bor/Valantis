@@ -1,7 +1,7 @@
 import styled from './style.module.scss';
-import { ProductCardContainerProps } from './types';
+import { SidebarContainerProps } from './types';
 
-export function ProductCardContainer(props: ProductCardContainerProps) {
+export function SidebarContainer(props: SidebarContainerProps) {
   const { children } = props;
   return <div className={styled.container}>{children}</div>;
 }

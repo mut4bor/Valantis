@@ -12,7 +12,7 @@ export function ProductCard(props: ProductCardProps) {
             key={index}
             variant="text"
             animation="wave"
-            sx={{ fontSize: '1rem' }}
+            sx={{ fontSize: '1.4rem' }}
           />
         ))}
       </>
@@ -22,10 +22,10 @@ export function ProductCard(props: ProductCardProps) {
 
   return (
     <>
-      <h4 className={styled.id}>ID: {id}</h4>
-      <h4 className={styled.name}>Product: {name}</h4>
-      <h4 className={styled.price}>Price: {price} ₽</h4>
-      <h4 className={styled.brand}>Brand: {brand ? brand : '#'}</h4>
+      <p className={styled.id}>ID: {id}</p>
+      <p className={styled.name}>Product: {name}</p>
+      <p className={styled.price}>Price: {price} ₽</p>
+      <p className={styled.brand}>Brand: {brand ? brand : '#'}</p>
     </>
   );
 }

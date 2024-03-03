@@ -1,15 +1,21 @@
 import _ from 'lodash';
 import { ProductCard } from '../product-card';
 import { ProductCardContainer } from '../product-card-container';
-import { useGetIdsQuery, useGetItemsQuery } from 'shared/redux/slices/APISlice'; // Подставьте правильный путь к вашим RTK Query
+import {
+  useGetIdsQuery,
+  useGetItemsQuery,
+} from 'shared/api/redux/slices/APISlice';
 import { useEffect } from 'react';
-import { useAppSelector, useAppDispatch } from 'shared/redux/hooks';
-import { isDisabledChanged } from 'shared/redux/slices/PaginationSlice';
+import { useAppSelector, useAppDispatch } from 'shared/api/redux/hooks';
+import { isDisabledChanged } from 'shared/api/redux/slices/PaginationSlice';
+import { useHandleFetchError } from 'shared/hooks/useHandleFetchError';
 
 export function ProductList() {
   const dispatch = useAppDispatch();
 
-  const PaginationValue = useAppSelector((state) => state.pagination.value);
+  const { value: paginationValue } = useAppSelector(
+    (state) => state.pagination
+  );
 
   const productsToShow = useAppSelector(
     (state) => state.settings.productsToShow
@@ -17,11 +23,11 @@ export function ProductList() {
 
   const {
     data: idsData,
-    error: idsError,
+    isError: idsIsError,
     refetch: idsRefetch,
     isFetching: idsIsFetching,
   } = useGetIdsQuery({
-    offset: (PaginationValue - 1) * productsToShow,
+    offset: (paginationValue - 1) * productsToShow,
     limit: productsToShow,
   });
 
@@ -29,7 +35,7 @@ export function ProductList() {
 
   const {
     data: itemsData,
-    error: itemsError,
+    isError: itemsIsError,
     refetch: itemsRefetch,
     isFetching: itemsIsFetching,
   } = useGetItemsQuery({ ids: filteredIdsData });
@@ -39,10 +45,8 @@ export function ProductList() {
     (itemData) => itemData.id
   );
 
-  useEffect(() => {
-    if (idsError) idsRefetch();
-    if (itemsError) itemsRefetch();
-  }, [idsError, itemsError, idsRefetch, itemsRefetch]);
+  useHandleFetchError(idsIsError, idsRefetch);
+  useHandleFetchError(itemsIsError, itemsRefetch);
 
   const isFetching = (): boolean => {
     return idsIsFetching || itemsIsFetching;
@@ -50,12 +54,12 @@ export function ProductList() {
 
   useEffect(() => {
     dispatch(isDisabledChanged(isFetching()));
-  }, [idsIsFetching, itemsIsFetching]);
+  }, [idsIsFetching, itemsIsFetching, isFetching]);
 
   return (
-    <>
+    <ul>
       {isFetching()
-        ? [...Array(50)].map((_, index) => (
+        ? [...Array(productsToShow)].map((_, index) => (
             <ProductCardContainer key={index}>
               <ProductCard />
             </ProductCardContainer>
@@ -72,6 +76,6 @@ export function ProductList() {
               />
             </ProductCardContainer>
           ))}
-    </>
+    </ul>
   );
 }

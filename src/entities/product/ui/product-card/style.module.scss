@@ -1,14 +1,9 @@
 @import 'shared/vars';
 
-.circularContainer {
-  display: flex;
-  justify-content: center;
-}
-.id {
-}
-.name {
-}
-.price {
-}
+.id,
+.name,
+.price,
 .brand {
+  font-size: 1.4rem;
+  font-weight: 500;
 }

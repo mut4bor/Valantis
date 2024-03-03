@@ -1,4 +1,4 @@
-import { useAppSelector } from 'shared/redux/hooks';
+import { useAppSelector } from 'shared/api/redux/hooks';
 import styled from './style.module.scss';
 
 export function PaginationCounter() {

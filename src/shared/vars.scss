@@ -1,12 +1,14 @@
-$bp-320: 320px;
-$bp-425: 425px;
-$bp-768: 768px;
-$bp-1024: 1024px;
+$pageWidth320: 32em;
+$pageWidth425: 42.5em;
+$pageWidth768: 76.8em;
+$pageWidth1024: 102.4em;
 
-$scrollBarWidth: 8px;
+$scrollBarWidth: 0.8rem;
 $scrollBarBgColor: #d0d0d0;
 $scrollBarHoverBgColor: #9a9a9a;
 
 $backgroundColor: #141414;
 $darkGrayColor: #222222;
 $whiteColor: #e1e3e6;
+
+$containerWidth: 110rem;
