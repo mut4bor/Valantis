@@ -1,4 +1,3 @@
 export type CheckboxProps = {
-  label?: string;
-  checked?: boolean;
+  data: string;
 };

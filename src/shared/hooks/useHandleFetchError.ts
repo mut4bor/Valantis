@@ -1,10 +1,11 @@
 import { useEffect } from 'react';
 
 export const useHandleFetchError = (
-  error: boolean | undefined,
+  isError: boolean,
+  error: object | undefined,
   refetchFunc: () => void
 ): void => {
   useEffect(() => {
-    if (error) refetchFunc;
+    if (error || isError) refetchFunc;
   }, [error, refetchFunc]);
 };

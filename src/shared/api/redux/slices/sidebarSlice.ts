@@ -4,14 +4,22 @@ const sidebarSlice = createSlice({
   name: 'sidebar',
 
   initialState: {
-    productsToShow: 50,
+    filter: {
+      brand: '',
+      price: 0,
+      product: '',
+    },
+    filterBoolean: false,
   },
 
   reducers: {
-    p(state, action) {
-      state.productsToShow = action.payload;
+    filtersChanged(state, action) {
+      state.filter = action.payload;
+    },
+    filtersBooleanChanged(state, action) {
+      state.filterBoolean = action.payload;
     },
   },
 });
-export const { p } = sidebarSlice.actions;
+export const { filtersChanged, filtersBooleanChanged } = sidebarSlice.actions;
 export default sidebarSlice.reducer;

@@ -3,6 +3,8 @@ import { SidebarBrandProps } from './types';
 import { Checkbox } from 'shared/ui';
 import { useGetAllBrands } from 'shared/hooks/useGetAllBrands';
 import _ from 'lodash';
+import { useAppDispatch, useAppSelector } from 'shared/api/redux/hooks';
+import { filtersChanged } from 'shared/api/redux/slices/sidebarSlice';
 
 export function SidebarBrand(props: SidebarBrandProps) {
   const { active } = props;
@@ -11,16 +13,13 @@ export function SidebarBrand(props: SidebarBrandProps) {
 
   const filteredFields = _.uniq(data);
 
-  console.log(filteredFields);
   return (
     <>
       {active && (
         <div className={styled.container}>
           <>
             {filteredFields.map((data, index) => {
-              return (
-                <Checkbox key={index} label={data === null ? '#' : data} />
-              );
+              return <Checkbox key={index} data={data} />;
             })}
           </>
         </div>

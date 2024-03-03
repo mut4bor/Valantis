@@ -3,13 +3,13 @@ import { useEffect } from 'react';
 import { useGetFieldsQuery } from 'shared/api/redux/slices/APISlice';
 
 export const useGetAllBrands = (): string[] => {
-  const { data, isError, refetch } = useGetFieldsQuery({
+  const { data, error, isError, refetch } = useGetFieldsQuery({
     field: 'brand',
   });
 
   useEffect(() => {
-    if (isError) refetch();
-  }, [isError, refetch]);
+    if (isError || error) refetch();
+  }, [isError, error, refetch]);
 
   const filteredFields = _.uniq(data?.result);
   return filteredFields;
