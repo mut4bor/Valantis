@@ -9,6 +9,10 @@ const sidebarSlice = createSlice({
       price: 0,
       product: '',
     },
+    priceRange: {
+      min: 0,
+      max: 0,
+    },
     filterBoolean: false,
   },
 
@@ -19,7 +23,11 @@ const sidebarSlice = createSlice({
     filtersBooleanChanged(state, action) {
       state.filterBoolean = action.payload;
     },
+    priceRangeChanged(state, action) {
+      state.priceRange = action.payload;
+    },
   },
 });
-export const { filtersChanged, filtersBooleanChanged } = sidebarSlice.actions;
+export const { filtersChanged, filtersBooleanChanged, priceRangeChanged } =
+  sidebarSlice.actions;
 export default sidebarSlice.reducer;

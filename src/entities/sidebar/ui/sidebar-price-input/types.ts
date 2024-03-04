@@ -1,5 +1,4 @@
 export type SidebarPriceInputProps = {
-  placeholder: string;
-  min?: string;
-  max?: string;
+  minmax: { min: number; max: number };
+  type: 'min' | 'max';
 };

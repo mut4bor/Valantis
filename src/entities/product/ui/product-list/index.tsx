@@ -1,21 +1,17 @@
 import _ from 'lodash';
 import { ProductCard } from '../product-card';
 import { ProductCardContainer } from '../product-card-container';
-import {
-  useFilterQuery,
-  useGetIdsQuery,
-  useGetItemsQuery,
-} from 'shared/api/redux/slices/APISlice';
 import { useEffect } from 'react';
 import { useAppSelector, useAppDispatch } from 'shared/api/redux/hooks';
 import { isDisabledChanged } from 'shared/api/redux/slices/PaginationSlice';
-import { useHandleFetchError } from 'shared/hooks/useHandleFetchError';
 import { filtersBooleanChanged } from 'shared/api/redux/slices/sidebarSlice';
+import { useIsFetching, useGetItems, useGetIds, useFilter } from 'shared/hooks';
 
 export function ProductList() {
   const dispatch = useAppDispatch();
 
   const { filter, filterBoolean } = useAppSelector((state) => state.sidebar);
+  const { brand, price, product } = filter;
 
   const { value: paginationValue } = useAppSelector(
     (state) => state.pagination
@@ -25,73 +21,42 @@ export function ProductList() {
     (state) => state.settings.productsToShow
   );
 
-  const {
-    data: idsData,
-    isError: idsIsError,
-    refetch: idsRefetch,
-    error: idsError,
-    isFetching: idsIsFetching,
-  } = useGetIdsQuery({
+  const { data: idsData, isFetching: idsIsFetching } = useGetIds({
     offset: (paginationValue - 1) * productsToShow,
     limit: productsToShow,
   });
 
   useEffect(() => {
-    if (filter.brand !== '' || filter.price !== 0 || filter.product !== '') {
-      dispatch(filtersBooleanChanged(true));
-    }
-    if (filter.brand === '' || filter.price === 0 || filter.product === '') {
-      dispatch(filtersBooleanChanged(false));
-    }
+    const isFilterActive = brand !== '' || price !== 0 || product !== '';
+
+    dispatch(filtersBooleanChanged(isFilterActive));
   }, [filter, dispatch]);
 
-  const {
-    data: filterData,
-    isError: filterIsError,
-    refetch: filterRefetch,
-    error: filterError,
-    isFetching: filterIsFetching,
-  } = useFilterQuery(filter);
+  const { data: filterData, isFetching: filterIsFetching } = useFilter(filter);
 
-  useHandleFetchError(filterIsError, filterError, filterRefetch);
+  const { data: itemsData, isFetching: itemsIsFetching } = useGetItems({
+    ids: filterBoolean ? filterData : idsData,
+  });
 
-  const filteredData = _.uniq(filterData?.result);
-
-  const filteredIdsData = _.uniq(idsData?.result);
-
-  const {
-    data: itemsData,
-    isError: itemsIsError,
-    refetch: itemsRefetch,
-    error: itemsError,
-    isFetching: itemsIsFetching,
-  } = useGetItemsQuery({ ids: filterBoolean ? filteredData : filteredIdsData });
-
-  const filteredItemsData = _.uniqBy(
-    itemsData?.result,
-    (itemData) => itemData.id
+  const isFetching = useIsFetching(
+    idsIsFetching,
+    itemsIsFetching,
+    filterIsFetching
   );
 
-  useHandleFetchError(idsIsError, idsError, idsRefetch);
-  useHandleFetchError(itemsIsError, itemsError, itemsRefetch);
-
-  const isFetching = (): boolean => {
-    return idsIsFetching || itemsIsFetching || filterIsFetching;
-  };
-
   useEffect(() => {
-    dispatch(isDisabledChanged(isFetching()));
-  }, [idsIsFetching, itemsIsFetching, isFetching]);
+    dispatch(isDisabledChanged(isFetching));
+  }, [isFetching, idsIsFetching, itemsIsFetching, filterIsFetching]);
 
   return (
     <ul>
-      {isFetching()
+      {isFetching
         ? [...Array(productsToShow)].map((_, index) => (
             <ProductCardContainer key={index}>
               <ProductCard />
             </ProductCardContainer>
           ))
-        : filteredItemsData.map((data, index) => (
+        : itemsData.map((data, index) => (
             <ProductCardContainer key={index}>
               <ProductCard
                 data={{

@@ -19,5 +19,5 @@ export const useIdsLogic = (): void => {
     dispatch(
       maxValueChanged(Math.ceil(filteredAllIdsData.length / productsToShow))
     );
-  }, [filteredAllIdsData]);
+  }, [filteredAllIdsData, productsToShow]);
 };

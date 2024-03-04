@@ -7,7 +7,7 @@ import {
 import { useAppDispatch, useAppSelector } from 'shared/api/redux/hooks';
 import { ProductList } from 'entities/product';
 
-import { useIdsLogic } from 'shared/hooks/useIdsLogic';
+import { useIdsLogic } from 'shared/hooks';
 import { increment, decrement } from 'shared/api/redux/slices/PaginationSlice';
 import { SidebarList } from 'entities/sidebar';
 
