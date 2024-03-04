@@ -1,8 +1,9 @@
-import { useGetItemsQuery } from 'shared/api/redux/slices/APISlice';
+import { useGetItemsQuery } from 'shared/api/redux/slices/apiSlice';
 import _ from 'lodash';
 import { useEffect } from 'react';
+import { GetItemsParams } from 'shared/api/redux';
 
-export const useGetItems = (args: { ids: string[] }) => {
+export const useGetItems = (args: GetItemsParams) => {
   const { ids } = args;
   const { data, isError, refetch, error, isFetching } = useGetItemsQuery({
     ids: ids,

@@ -19,3 +19,11 @@
 .mainWrapper {
   width: 75%;
 }
+.mainHeader {
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+}
+.input {
+  width: 100%;
+}

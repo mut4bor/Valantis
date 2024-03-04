@@ -1,6 +1,5 @@
 import { API_URL, API_AUTH_TOKEN } from 'shared/config';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import _ from 'lodash';
 import md5 from 'md5';
 import {
   Response,
@@ -9,7 +8,7 @@ import {
   ItemsResponse,
   GetItemsParams,
   GetFieldsParams,
-} from './types';
+} from '../types';
 
 const generateAuthString = (password: string): string => {
   const timestamp = new Date().toISOString().split('T')[0].replace(/-/g, '');

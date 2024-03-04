@@ -1,0 +1,65 @@
+@import 'shared/constants/vars';
+
+$mainColor: #adb5bd;
+$hoverColor: #e1e3e6;
+
+.container {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-left: auto;
+  gap: 0.7rem;
+}
+.label {
+  font-size: 1.6rem;
+  cursor: text;
+}
+.button {
+  font-size: 1.5rem;
+  background: transparent;
+  color: $mainColor;
+  transition: 0.1s;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5rem;
+  &:hover {
+    color: $hoverColor;
+    .use {
+      fill: $hoverColor;
+    }
+  }
+}
+.svg {
+  height: 1.5rem;
+  aspect-ratio: 1;
+  transform: rotate(90deg);
+  transition: 0.1s;
+  &.active {
+    transform: rotate(270deg);
+  }
+}
+.use {
+  fill: $mainColor;
+  transition: 0.1s;
+}
+
+.list {
+  font-size: 1.6rem;
+  position: absolute;
+  z-index: 9999;
+  left: 0;
+  top: 100%;
+  background: $darkGrayColor;
+  width: 100%;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  border: $whiteColor 0.1rem solid;
+  gap: 0.5rem;
+  button {
+    background: transparent;
+  }
+}

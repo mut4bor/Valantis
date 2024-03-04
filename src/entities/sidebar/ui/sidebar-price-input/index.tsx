@@ -8,14 +8,6 @@ export function SidebarPriceInput(props: SidebarPriceInputProps) {
   const { minmax, type } = props;
   const { min, max } = minmax;
   const { priceRange } = useAppSelector((state) => state.sidebar);
-  const { min: priceRangeMin, max: priceRangeMax } = priceRange;
-
-  const useGetInputValue = () => {
-    const value = (value: number | string) => {
-      return value !== 0 ? value : '';
-    };
-    return type === 'min' ? value(priceRangeMin) : value(priceRangeMax);
-  };
 
   const useHandleDispatchPrice = (
     event: React.ChangeEvent<HTMLInputElement>
@@ -45,7 +37,7 @@ export function SidebarPriceInput(props: SidebarPriceInputProps) {
       min={min}
       max={max}
       className={styled.input}
-      value={useGetInputValue()}
+      value={undefined}
       onChange={useHandleDispatchPrice}
       placeholder={useGetPlaceholder()}
     />

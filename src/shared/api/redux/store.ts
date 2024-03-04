@@ -1,7 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { setupListeners } from '@reduxjs/toolkit/query';
-import productApi from './slices/APISlice';
-import paginationSlice from './slices/PaginationSlice';
+import productApi from './slices/apiSlice';
+import paginationSlice from './slices/paginationSlice';
 import settingsSlice from 'shared/api/redux/slices/settingsSlice';
 import sidebarSlice from './slices/sidebarSlice';
 

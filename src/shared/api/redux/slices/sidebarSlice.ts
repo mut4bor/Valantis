@@ -1,33 +1,32 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { FilterParams } from '../types';
 
 const sidebarSlice = createSlice({
   name: 'sidebar',
 
   initialState: {
     filter: {
-      brand: '',
-      price: 0,
-      product: '',
-    },
+      brand: undefined,
+    } as FilterParams,
     priceRange: {
-      min: 0,
-      max: 0,
+      min: null,
+      max: null,
     },
-    filterBoolean: false,
+    radioboxDisabled: true,
   },
 
   reducers: {
     filtersChanged(state, action) {
       state.filter = action.payload;
     },
-    filtersBooleanChanged(state, action) {
-      state.filterBoolean = action.payload;
-    },
     priceRangeChanged(state, action) {
       state.priceRange = action.payload;
     },
+    radioboxDisabledChanged(state, action) {
+      state.radioboxDisabled = action.payload;
+    },
   },
 });
-export const { filtersChanged, filtersBooleanChanged, priceRangeChanged } =
+export const { filtersChanged, priceRangeChanged, radioboxDisabledChanged } =
   sidebarSlice.actions;
 export default sidebarSlice.reducer;

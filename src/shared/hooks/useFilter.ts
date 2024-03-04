@@ -1,13 +1,10 @@
 import { useFilterQuery } from 'shared/api/redux';
 import _ from 'lodash';
 import { useEffect } from 'react';
+import { FilterParams } from 'shared/api/redux';
 
-export const useFilter = (filter: {
-  brand?: string;
-  price?: number;
-  product?: string;
-}) => {
-  const { data, isError, refetch, error, isFetching } = useFilterQuery(filter);
+export const useFilter = (args: FilterParams) => {
+  const { data, isError, refetch, error, isFetching } = useFilterQuery(args);
 
   useEffect(() => {
     if (isError || error) refetch;

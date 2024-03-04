@@ -1,0 +1,33 @@
+@import 'shared/constants/vars';
+
+.inputWrapper {
+  position: relative;
+  display: flex;
+  flex: 1 0 auto;
+}
+.searchSvg {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 1.68rem;
+  aspect-ratio: 1;
+}
+.searchUse {
+  filter: invert(1);
+  opacity: 0.4;
+}
+.input {
+  width: 100%;
+  height: 100%;
+  background: #464646;
+  border-radius: 1rem;
+  color: #ccc;
+  font-size: 1.4rem;
+  padding-left: 3.7rem;
+  transition: 0.15s;
+  &:hover,
+  &:focus {
+    background: #4a4a4a;
+  }
+}

@@ -1,8 +1,9 @@
-import { useGetIdsQuery } from 'shared/api/redux/slices/APISlice';
+import { useGetIdsQuery } from 'shared/api/redux/slices/apiSlice';
 import _ from 'lodash';
 import { useEffect } from 'react';
+import { GetIdsParams } from 'shared/api/redux';
 
-export const useGetIds = (args: { offset?: number; limit?: number }) => {
+export const useGetIds = (args: GetIdsParams) => {
   const { offset, limit } = args;
   const { data, isError, refetch, error, isFetching } = useGetIdsQuery({
     offset: offset,

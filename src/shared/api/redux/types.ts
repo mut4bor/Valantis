@@ -13,9 +13,9 @@ export interface ItemsResponse {
   ];
 }
 export interface FilterParams {
-  brand?: string | null;
-  price?: number;
-  product?: string;
+  brand?: string | null | undefined;
+  price?: number | undefined;
+  product?: string | undefined;
 }
 export interface GetIdsParams {
   offset?: number;
@@ -27,7 +27,7 @@ export interface GetItemsParams {
   limit?: number;
 }
 export interface GetFieldsParams {
-  field: string;
+  field: 'brand' | 'id' | 'price' | 'product';
   offset?: number;
   limit?: number;
 }
