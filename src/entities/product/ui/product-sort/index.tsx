@@ -1,12 +1,39 @@
-import { useState } from 'react';
 import styled from './style.module.scss';
 import { SVG } from 'shared/ui';
 import { ProductSortRadio } from '../product-sort-radio';
+import { useAppSelector } from 'shared/api/redux';
+
+import { useState, useEffect, useRef } from 'react';
 
 export function ProductSort() {
   const [active, setActive] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (ref.current && !ref.current.contains(event.target as Node)) {
+        setActive(false);
+      }
+    }
+
+    document.addEventListener('click', handleClickOutside);
+    return () => {
+      document.removeEventListener('click', handleClickOutside);
+    };
+  }, []);
+
+  const { selectedSort, sortNameMap } = useAppSelector(
+    (state) => state.products.productsSort
+  );
+
+  const sortNameMapKeys = Object.keys(sortNameMap);
+
+  const handleListClosing = () => {
+    setActive(false);
+  };
+
   return (
-    <div className={styled.container}>
+    <div ref={ref} className={styled.container}>
       <label htmlFor="sortButton" className={styled.label}>
         Сортировка:
       </label>
@@ -16,7 +43,7 @@ export function ProductSort() {
         className={styled.button}
         onClick={() => setActive(!active)}
       >
-        сначала недорогие
+        {sortNameMap[selectedSort]}
         <SVG
           href="#arrow"
           svgClassName={`${active ? styled.active : ''} ${styled.svg}`}
@@ -25,27 +52,15 @@ export function ProductSort() {
       </button>
       {active && (
         <ul className={styled.list}>
-          <ProductSortRadio
-            onChange={() => setActive(false)}
-            id="cheap"
-            defaultChecked
-            labelText="сначала недорогие"
-          />
-          <ProductSortRadio
-            onChange={() => setActive(false)}
-            id="expensive"
-            labelText="сначала дорогие"
-          />
-          <ProductSortRadio
-            onChange={() => setActive(false)}
-            id="az"
-            labelText="по названию (а-я)"
-          />
-          <ProductSortRadio
-            onChange={() => setActive(false)}
-            id="za"
-            labelText="по названию (я-а)"
-          />
+          {sortNameMapKeys.map((data, index) => {
+            return (
+              <ProductSortRadio
+                key={index}
+                onChange={handleListClosing}
+                id={data}
+              />
+            );
+          })}
         </ul>
       )}
     </div>

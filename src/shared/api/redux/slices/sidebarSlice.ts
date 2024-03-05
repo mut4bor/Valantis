@@ -8,9 +8,11 @@ const sidebarSlice = createSlice({
     filter: {
       brand: undefined,
     } as FilterParams,
+    filterIsEmpty: true,
     priceRange: {
-      min: null,
-      max: null,
+      priceMin: '',
+      priceMax: '',
+      priceIsEmpty: true,
     },
     radioboxDisabled: true,
   },
@@ -18,6 +20,7 @@ const sidebarSlice = createSlice({
   reducers: {
     filtersChanged(state, action) {
       state.filter = action.payload;
+      state.filterIsEmpty = JSON.stringify(action.payload) === '{}';
     },
     priceRangeChanged(state, action) {
       state.priceRange = action.payload;

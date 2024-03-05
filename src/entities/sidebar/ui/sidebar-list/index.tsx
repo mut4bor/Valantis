@@ -11,17 +11,6 @@ export function SidebarList() {
     <>
       <SidebarContainer
         title={{
-          text: 'Производитель',
-          onClick: () => {
-            setItemActive({ ...itemActive, brand: !itemActive.brand });
-          },
-          active: itemActive.brand,
-        }}
-      >
-        <SidebarBrand active={itemActive.brand} />
-      </SidebarContainer>
-      <SidebarContainer
-        title={{
           text: 'Цена',
           onClick: () => {
             setItemActive({ ...itemActive, price: !itemActive.price });
@@ -30,6 +19,17 @@ export function SidebarList() {
         }}
       >
         <SidebarPrice active={itemActive.price} />
+      </SidebarContainer>
+      <SidebarContainer
+        title={{
+          text: 'Производитель',
+          onClick: () => {
+            setItemActive({ ...itemActive, brand: !itemActive.brand });
+          },
+          active: itemActive.brand,
+        }}
+      >
+        <SidebarBrand active={itemActive.brand} />
       </SidebarContainer>
     </>
   );

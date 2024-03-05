@@ -1,22 +1,26 @@
 import styled from './style.module.scss';
 import { SidebarBrandProps } from './types';
-import { useGetFields } from 'shared/hooks';
+import { useGetFields, useAlphabeticalSort } from 'shared/hooks';
 import { filtersChanged } from 'shared/api/redux/slices/sidebarSlice';
 import { useAppDispatch, useAppSelector } from 'shared/api/redux/hooks';
 import { SidebarRadiobox } from '../sidebar-radiobox';
+import _ from 'lodash';
 
 export function SidebarBrand(props: SidebarBrandProps) {
+  const dispatch = useAppDispatch();
   const { active } = props;
 
-  const { data, isFetching: brandIsFetching } = useGetFields({
+  const { data: brandData, isFetching: brandIsFetching } = useGetFields({
     field: 'brand',
   });
+
+  const uniqData = _.uniq(brandData);
+
+  const data = useAlphabeticalSort(uniqData);
 
   const radioboxDisabled = useAppSelector(
     (state) => state.sidebar.radioboxDisabled
   );
-
-  const dispatch = useAppDispatch();
 
   return (
     <>

@@ -2,6 +2,7 @@
 
 $mainColor: #adb5bd;
 $hoverColor: #e1e3e6;
+$fontSize: 1.5rem;
 
 .container {
   position: relative;
@@ -12,11 +13,11 @@ $hoverColor: #e1e3e6;
   gap: 0.7rem;
 }
 .label {
-  font-size: 1.6rem;
+  font-size: $fontSize;
   cursor: text;
 }
 .button {
-  font-size: 1.5rem;
+  font-size: $fontSize;
   background: transparent;
   color: $mainColor;
   transition: 0.1s;

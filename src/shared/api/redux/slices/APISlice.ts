@@ -5,6 +5,7 @@ import {
   Response,
   FilterParams,
   GetIdsParams,
+  FieldsResponse,
   ItemsResponse,
   GetItemsParams,
   GetFieldsParams,
@@ -60,7 +61,7 @@ const productApi = createApi({
       }),
     }),
 
-    getFields: builder.query<Response, GetFieldsParams>({
+    getFields: builder.query<FieldsResponse, GetFieldsParams>({
       query: (params) => ({
         url: '/',
         method: 'POST',

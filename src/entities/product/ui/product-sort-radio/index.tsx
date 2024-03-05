@@ -1,20 +1,38 @@
 import { ProductSortRadioProps } from './types';
 import styled from './style.module.scss';
+import {
+  useAppDispatch,
+  setSelectedOption,
+  useAppSelector,
+} from 'shared/api/redux';
 
 export function ProductSortRadio(props: ProductSortRadioProps) {
-  const { labelText, id, defaultChecked, onChange } = props;
+  const { id, defaultChecked, onChange } = props;
+  const dispatch = useAppDispatch();
+  const handleOptionChange = (option: string) => {
+    dispatch(setSelectedOption(option));
+  };
+
+  const { selectedSort, sortNameMap } = useAppSelector(
+    (state) => state.products.productsSort
+  );
+
   return (
     <li>
       <input
         className={styled.checkbox}
-        onChange={onChange}
+        checked={selectedSort === id}
+        onChange={() => {
+          handleOptionChange(id);
+          onChange && onChange();
+        }}
         defaultChecked={defaultChecked}
         id={id}
         name="sortChoose"
         type="radio"
       />
       <label className={styled.label} htmlFor={id}>
-        {labelText}
+        {sortNameMap[id]}
       </label>
     </li>
   );

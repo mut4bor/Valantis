@@ -1,6 +1,9 @@
 export interface Response {
   result: string[];
 }
+export interface FieldsResponse {
+  result: string[];
+}
 
 export interface ItemsResponse {
   result: [
@@ -13,6 +16,7 @@ export interface ItemsResponse {
   ];
 }
 export interface FilterParams {
+  id?: string | undefined;
   brand?: string | null | undefined;
   price?: number | undefined;
   product?: string | undefined;
@@ -23,8 +27,6 @@ export interface GetIdsParams {
 }
 export interface GetItemsParams {
   ids: string[] | undefined;
-  offset?: number;
-  limit?: number;
 }
 export interface GetFieldsParams {
   field: 'brand' | 'id' | 'price' | 'product';

@@ -1,6 +1,6 @@
 export * from './slices/apiSlice';
 export * from './slices/paginationSlice';
-export * from './slices/settingsSlice';
+export * from './slices/productsSlice';
 export * from './slices/sidebarSlice';
 
 export * from './hooks';

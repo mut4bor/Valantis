@@ -6,15 +6,13 @@ export function SidebarTitle(props: SidebarContainerProps) {
   const { title, onClick, active } = props;
 
   return (
-    <>
-      <button type="button" className={styled.title} onClick={onClick}>
-        <SVG
-          href="#arrow"
-          svgClassName={`${active ? styled.active : ''} ${styled.svg}`}
-          useClassName={styled.use}
-        />
-        {title}
-      </button>
-    </>
+    <button type="button" className={styled.title} onClick={onClick}>
+      <SVG
+        href="#arrow"
+        svgClassName={`${active ? styled.active : ''} ${styled.svg}`}
+        useClassName={styled.use}
+      />
+      {title}
+    </button>
   );
 }

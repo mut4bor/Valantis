@@ -11,7 +11,7 @@ export const useGetIds = (args: GetIdsParams) => {
   });
 
   useEffect(() => {
-    if (isError || error) refetch;
+    if (isError || error) refetch();
   }, [isError, error, refetch]);
 
   const filteredIdsData = _.uniq(data?.result);

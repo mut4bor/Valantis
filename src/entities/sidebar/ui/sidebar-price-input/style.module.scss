@@ -8,4 +8,8 @@
   width: 47.5%;
   border: 0.1rem $whiteColor solid;
   padding: 0.5rem;
+  padding-right: 0;
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+  }
 }

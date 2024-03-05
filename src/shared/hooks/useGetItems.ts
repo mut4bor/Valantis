@@ -3,14 +3,13 @@ import _ from 'lodash';
 import { useEffect } from 'react';
 import { GetItemsParams } from 'shared/api/redux';
 
-export const useGetItems = (args: GetItemsParams) => {
-  const { ids } = args;
-  const { data, isError, refetch, error, isFetching } = useGetItemsQuery({
-    ids: ids,
+export const useGetItems = (ids: GetItemsParams, skip?: boolean) => {
+  const { data, isError, refetch, error, isFetching } = useGetItemsQuery(ids, {
+    skip,
   });
 
   useEffect(() => {
-    if (isError || error) refetch;
+    if (isError || error) refetch();
   }, [isError, error, refetch]);
 
   const filteredItemsData = _.uniqBy(data?.result, (itemData) => itemData.id);

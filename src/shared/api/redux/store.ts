@@ -2,14 +2,14 @@ import { configureStore } from '@reduxjs/toolkit';
 import { setupListeners } from '@reduxjs/toolkit/query';
 import productApi from './slices/apiSlice';
 import paginationSlice from './slices/paginationSlice';
-import settingsSlice from 'shared/api/redux/slices/settingsSlice';
+import productsSlice from 'shared/api/redux/slices/productsSlice';
 import sidebarSlice from './slices/sidebarSlice';
 
 export const store = configureStore({
   reducer: {
     [productApi.reducerPath]: productApi.reducer,
     pagination: paginationSlice,
-    settings: settingsSlice,
+    products: productsSlice,
     sidebar: sidebarSlice,
   },
   middleware: (getDefaultMiddleware) =>
