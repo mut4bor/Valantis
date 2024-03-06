@@ -28,7 +28,7 @@ export function ProductSortRadio(props: ProductSortRadioProps) {
         }}
         defaultChecked={defaultChecked}
         id={id}
-        name="sortChoose"
+        name="priceSortChoose"
         type="radio"
       />
       <label className={styled.label} htmlFor={id}>

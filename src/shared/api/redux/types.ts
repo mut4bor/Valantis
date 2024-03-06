@@ -1,8 +1,8 @@
 export interface Response {
   result: string[];
 }
-export interface FieldsResponse {
-  result: string[];
+export interface PricesResponse {
+  result: number[];
 }
 
 export interface ItemsResponse {
@@ -29,7 +29,11 @@ export interface GetItemsParams {
   ids: string[] | undefined;
 }
 export interface GetFieldsParams {
-  field: 'brand' | 'id' | 'price' | 'product';
+  field: 'brand' | 'price' | 'product';
+  offset?: number;
+  limit?: number;
+}
+export interface GetPricesParams {
   offset?: number;
   limit?: number;
 }

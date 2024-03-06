@@ -5,10 +5,11 @@ import {
   Response,
   FilterParams,
   GetIdsParams,
-  FieldsResponse,
+  PricesResponse,
   ItemsResponse,
   GetItemsParams,
   GetFieldsParams,
+  GetPricesParams,
 } from '../types';
 
 const generateAuthString = (password: string): string => {
@@ -61,13 +62,23 @@ const productApi = createApi({
       }),
     }),
 
-    getFields: builder.query<FieldsResponse, GetFieldsParams>({
+    getFields: builder.query<Response, GetFieldsParams>({
       query: (params) => ({
         url: '/',
         method: 'POST',
         body: {
           action: 'get_fields',
           params: params,
+        },
+      }),
+    }),
+    getPrices: builder.query<PricesResponse, GetPricesParams>({
+      query: (params) => ({
+        url: '/',
+        method: 'POST',
+        body: {
+          action: 'get_fields',
+          params: { field: 'price', params },
         },
       }),
     }),
@@ -78,6 +89,7 @@ export const {
   useFilterQuery,
   useGetIdsQuery,
   useGetFieldsQuery,
+  useGetPricesQuery,
   useGetItemsQuery,
 } = productApi;
 

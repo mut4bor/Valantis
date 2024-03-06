@@ -14,9 +14,8 @@ export const useGetIds = (args: GetIdsParams) => {
     if (isError || error) refetch();
   }, [isError, error, refetch]);
 
-  const filteredIdsData = _.uniq(data?.result);
   return {
-    data: filteredIdsData,
+    data: data?.result,
     isFetching: isFetching,
   };
 };

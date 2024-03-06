@@ -5,4 +5,6 @@ export * from './useFilter';
 export * from './useGetFields';
 export * from './useGetIds';
 export * from './useGetItems';
+export * from './useGetPrices';
+export * from './useIdsSortedByPrice';
 export * from './useIsFetching';

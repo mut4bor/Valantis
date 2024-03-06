@@ -3,7 +3,7 @@ import { SidebarBrandProps } from './types';
 import { useGetFields, useAlphabeticalSort } from 'shared/hooks';
 import { filtersChanged } from 'shared/api/redux/slices/sidebarSlice';
 import { useAppDispatch, useAppSelector } from 'shared/api/redux/hooks';
-import { SidebarRadiobox } from '../sidebar-radiobox';
+import { SidebarRadiobox } from '../sidebar-brand-radio';
 import _ from 'lodash';
 
 export function SidebarBrand(props: SidebarBrandProps) {
@@ -46,8 +46,7 @@ export function SidebarBrand(props: SidebarBrandProps) {
                   id={isDataNotNull()}
                   title={isDataNotNull()}
                   onChange={() => {
-                    !radioboxDisabled &&
-                      dispatch(filtersChanged({ brand: data }));
+                    dispatch(filtersChanged({ brand: data }));
                   }}
                 />
               );

@@ -1,7 +1,6 @@
-import _ from 'lodash';
 import { useEffect } from 'react';
 import { useGetFieldsQuery } from 'shared/api/redux/slices/apiSlice';
-import { FieldsResponse, GetFieldsParams } from 'shared/api/redux';
+import { GetFieldsParams } from 'shared/api/redux';
 
 export const useGetFields = (args: GetFieldsParams, skip?: boolean) => {
   const { field, offset, limit } = args;
