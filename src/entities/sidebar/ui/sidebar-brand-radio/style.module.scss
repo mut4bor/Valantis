@@ -19,7 +19,7 @@ $height: 1.6rem;
       aspect-ratio: 1;
       flex-shrink: 0;
       flex-grow: 0;
-      border: 0.1rem solid $borderColor;
+      border: 0.1rem solid $checkboxBorderColor;
       border-radius: 0.5rem;
       margin-right: 0.8rem;
       background-repeat: no-repeat;
@@ -29,12 +29,12 @@ $height: 1.6rem;
     }
   }
   &:checked + label::before {
-    border-color: $mainColor;
-    background-color: $mainColor;
+    border-color: $whiteColor;
+    background-color: $whiteColor;
     background-image: url('./icons/checkmark.svg');
   }
 
   &:not(:disabled):not(:checked) + label:hover::before {
-    border-color: $mainColor;
+    border-color: $whiteColor;
   }
 }

@@ -1,0 +1,24 @@
+@import 'shared/constants/vars';
+
+@media (min-width: $pageWidth320) {
+  .container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: $headerHeight;
+    border-bottom: 0.1rem solid $whiteColor;
+    padding: 0 2rem;
+  }
+
+  .reset {
+    background: transparent;
+    font-size: 1.6rem;
+    color: $whiteColor;
+  }
+}
+@media (min-width: $pageWidth1024) {
+  .container {
+    display: none;
+  }
+}

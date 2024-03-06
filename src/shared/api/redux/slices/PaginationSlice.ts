@@ -7,7 +7,7 @@ const paginationSlice = createSlice({
     value: 1,
     minValue: 1,
     maxValue: 100,
-    paginationDisabled: true,
+    paginationDisabled: false,
   },
 
   reducers: {

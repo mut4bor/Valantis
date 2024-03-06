@@ -1,0 +1,33 @@
+@import 'shared/constants/vars';
+
+@media (min-width: $pageWidth320) {
+  .button {
+    background: transparent;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+  }
+  .mobileSearchSvg {
+    height: 3rem;
+    aspect-ratio: 1;
+    transition: 0.1s;
+  }
+  .mobileSearchUse {
+    fill: $whiteColor;
+    color: $whiteColor;
+    stroke: $whiteColor;
+    transition: 0.1s;
+    opacity: 0.5;
+  }
+  .cancel {
+    color: $whiteColor;
+    font-size: 1.6rem;
+  }
+}
+
+@media (min-width: $pageWidth1024) {
+  .button {
+    display: none;
+  }
+}

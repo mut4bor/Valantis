@@ -1,0 +1,65 @@
+@import 'shared/constants/vars';
+
+@media (min-width: $pageWidth320) {
+  .container {
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 2;
+    background: $darkGrayColor;
+    width: 100%;
+    height: 100svh;
+    padding: $paddingX;
+    display: none;
+    flex: 1 0 auto;
+    &.mobileVisible {
+      display: flex;
+    }
+  }
+  .inputWrapper {
+    position: relative;
+    display: flex;
+    flex: 1 0 auto;
+    gap: 2rem;
+    height: $headerHeight;
+    padding: 0.4rem $paddingX 0.4rem 0;
+  }
+  .searchSvg {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 1.68rem;
+    aspect-ratio: 1;
+  }
+  .searchUse {
+    opacity: 0.4;
+  }
+  .input {
+    width: 100%;
+    height: 100%;
+    background: #464646;
+    border-radius: 1rem;
+    color: #ccc;
+    font-size: 1.4rem;
+    padding-left: 3.7rem;
+    transition: 0.15s;
+    &:hover,
+    &:focus {
+      background: #4a4a4a;
+    }
+  }
+}
+@media (min-width: $pageWidth1024) {
+  .container {
+    position: static;
+    width: fit-content;
+    height: 100%;
+    padding: 0;
+    display: flex;
+  }
+  .inputWrapper {
+    height: 100%;
+    padding: 0;
+  }
+}

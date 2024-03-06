@@ -14,6 +14,7 @@ const sidebarSlice = createSlice({
       priceMax: '',
       priceIsEmpty: true,
     },
+    isOpenedOnMobile: false,
     radioboxDisabled: true,
   },
 
@@ -28,8 +29,15 @@ const sidebarSlice = createSlice({
     radioboxDisabledChanged(state, action) {
       state.radioboxDisabled = action.payload;
     },
+    isOpenedOnMobileChanged(state) {
+      state.isOpenedOnMobile = !state.isOpenedOnMobile;
+    },
   },
 });
-export const { filtersChanged, priceRangeChanged, radioboxDisabledChanged } =
-  sidebarSlice.actions;
+export const {
+  filtersChanged,
+  priceRangeChanged,
+  radioboxDisabledChanged,
+  isOpenedOnMobileChanged,
+} = sidebarSlice.actions;
 export default sidebarSlice.reducer;

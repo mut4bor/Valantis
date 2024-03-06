@@ -1,0 +1,30 @@
+@import 'shared/constants/vars';
+
+@media (min-width: $pageWidth320) {
+  .button {
+    background: transparent;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+  }
+  .svg {
+    height: 1.5rem;
+    aspect-ratio: 1;
+    transform: rotate(180deg);
+    transition: 0.1s;
+  }
+  .use {
+    fill: $whiteColor;
+    transition: 0.1s;
+  }
+  .heading {
+    font-size: 1.6rem;
+    color: $whiteColor;
+  }
+}
+@media (min-width: $pageWidth1024) {
+  .button {
+    display: none;
+  }
+}

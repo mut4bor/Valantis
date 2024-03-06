@@ -1,14 +1,29 @@
-import { SidebarBrand, SidebarContainer, SidebarPrice } from 'entities/sidebar';
+import styled from './style.module.scss';
+import {
+  SidebarBrand,
+  SidebarContainer,
+  SidebarPrice,
+  SidebarHeader,
+} from 'entities/sidebar';
 import { useState } from 'react';
+import { useAppSelector } from 'shared/api/redux';
 
-export function SidebarList() {
+export function Sidebar() {
   const [itemActive, setItemActive] = useState({
     brand: false,
     price: false,
   });
 
+  const { isOpenedOnMobile } = useAppSelector((state) => state.sidebar);
+
   return (
-    <>
+    <div
+      className={`${styled.wrapper} ${
+        isOpenedOnMobile ? styled.openedOnMobile : ''
+      }`}
+    >
+      <SidebarHeader />
+
       <SidebarContainer
         title={{
           text: 'Цена',
@@ -20,6 +35,7 @@ export function SidebarList() {
       >
         <SidebarPrice active={itemActive.price} />
       </SidebarContainer>
+
       <SidebarContainer
         title={{
           text: 'Производитель',
@@ -31,6 +47,6 @@ export function SidebarList() {
       >
         <SidebarBrand active={itemActive.brand} />
       </SidebarContainer>
-    </>
+    </div>
   );
 }

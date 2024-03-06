@@ -1,7 +1,6 @@
 @import 'shared/constants/vars';
 
-$mainColor: #adb5bd;
-$hoverColor: #e1e3e6;
+$unHoverColor: #adb5bd;
 $fontSize: 1.5rem;
 
 .container {
@@ -19,16 +18,16 @@ $fontSize: 1.5rem;
 .button {
   font-size: $fontSize;
   background: transparent;
-  color: $mainColor;
+  color: $unHoverColor;
   transition: 0.1s;
   display: flex;
   flex-direction: row;
   align-items: center;
   gap: 0.5rem;
   &:hover {
-    color: $hoverColor;
+    color: $whiteColor;
     .use {
-      fill: $hoverColor;
+      fill: $whiteColor;
     }
   }
 }
@@ -42,7 +41,7 @@ $fontSize: 1.5rem;
   }
 }
 .use {
-  fill: $mainColor;
+  fill: $unHoverColor;
   transition: 0.1s;
 }
 

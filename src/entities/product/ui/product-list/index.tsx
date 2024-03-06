@@ -1,6 +1,7 @@
 import { ProductCard } from '../product-card';
 import { useAppSelector } from 'shared/api/redux';
 import { useGetItems, useIdsSortedByPrice } from 'shared/hooks';
+import styled from './style.module.scss';
 
 export function ProductList() {
   const {
@@ -17,7 +18,7 @@ export function ProductList() {
   });
 
   return (
-    <ul>
+    <ul className={styled.list}>
       {idsIsFetching || productsIsFetching
         ? Array.from({ length: productsToShow }).map((_, index) => (
             <ProductCard key={`placeholder-${index}`} />

@@ -1,29 +1,20 @@
 @import 'shared/constants/vars';
 
-.container {
-  display: flex;
-  flex-direction: row;
-  gap: 2%;
-  max-width: $containerWidth;
-  width: 100%;
-  margin: 4rem auto;
-  border-radius: 0.5rem;
-  padding: 1rem;
+@media (min-width: $pageWidth320) {
+  .container {
+    display: flex;
+    flex-direction: row;
+    gap: 2%;
+    width: 100%;
+    margin: 0 auto;
+    border-radius: 0.5rem;
+    padding: 1rem $paddingX;
+    margin: $headerHeight auto;
+  }
 }
-.sidebarWrapper {
-  width: 23%;
-  background: $darkGrayColor;
-  border-radius: 0.5rem;
-  height: fit-content;
-}
-.mainWrapper {
-  width: 75%;
-}
-.mainHeader {
-  display: flex;
-  flex-direction: row;
-  gap: 2rem;
-}
-.input {
-  width: 100%;
+@media (min-width: $pageWidth1024) {
+  .container {
+    max-width: $containerWidth;
+    margin: 4rem auto;
+  }
 }

@@ -1,0 +1,28 @@
+@import 'shared/constants/vars';
+
+@media (min-width: $pageWidth320) {
+  .wrapper {
+    width: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 1;
+    border-radius: 0.5rem;
+    height: 100svh;
+    overflow: auto;
+    background: $darkGrayColor;
+    transform: translateX(-100%);
+    transition: 0.3s ease-in-out;
+    &.openedOnMobile {
+      transform: translateX(0);
+    }
+  }
+}
+@media (min-width: $pageWidth1024) {
+  .wrapper {
+    position: static;
+    width: 23%;
+    height: fit-content;
+    transform: translateX(0);
+  }
+}
