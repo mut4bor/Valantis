@@ -7,6 +7,7 @@ import styled from './style.module.scss';
 import { SVG } from 'shared/ui';
 import { HeaderInputToggle } from 'entities/header';
 import { useState } from 'react';
+import { useLockPageScroll } from 'shared/hooks';
 
 export function HeaderInput() {
   const dispatch = useAppDispatch();
@@ -17,6 +18,8 @@ export function HeaderInput() {
   const toggleInput = () => {
     setShowInputBoolean(!showInputBoolean);
   };
+
+  useLockPageScroll(showInputBoolean);
 
   return (
     <>

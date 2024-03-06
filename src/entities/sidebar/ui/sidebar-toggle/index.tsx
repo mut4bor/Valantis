@@ -1,10 +1,18 @@
 import { SVG } from 'shared/ui';
 import styled from './style.module.scss';
-import { useAppDispatch } from 'shared/api/redux';
-import { isOpenedOnMobileChanged } from 'shared/api/redux';
+import {
+  useAppDispatch,
+  isOpenedOnMobileChanged,
+  useAppSelector,
+} from 'shared/api/redux';
+import { useLockPageScroll } from 'shared/hooks';
 
 export function SidebarToggle() {
   const dispatch = useAppDispatch();
+
+  const { isOpenedOnMobile } = useAppSelector((state) => state.sidebar);
+
+  useLockPageScroll(isOpenedOnMobile);
 
   return (
     <button
