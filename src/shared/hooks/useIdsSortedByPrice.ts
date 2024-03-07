@@ -48,18 +48,36 @@ export const useIdsSortedByPrice = (reverse = false) => {
     idsData.map((id, index) => [id, pricesData[index]])
   );
 
-  const sortedIds = (filterIsEmpty ? [...idsData] : [...brandFilterData]).sort(
-    (a, b) => {
+  const sortIdArray = (arr: string[]) => {
+    return [...arr].sort((a, b) => {
       const price1 = idToPriceMap.get(a);
       const price2 = idToPriceMap.get(b);
       if (price1 === undefined || price2 === undefined) {
         return 0;
       }
       return price1 - price2;
-    }
-  );
+    });
+  };
 
-  const uniqSortedIds = _.uniq(sortedIds);
+  const sortedIds = sortIdArray(idsData);
+  const sortedBrandsIds = sortIdArray(brandFilterData);
+  const sortedProductsIds = sortedBrandsIds.length
+    ? sortIdArray(productFilterData).filter((id) =>
+        sortedBrandsIds.includes(id)
+      )
+    : sortIdArray(productFilterData);
+
+  const handleIdsReturn = (): string[] => {
+    if (sortedProductsIds.length) {
+      return sortedProductsIds;
+    }
+    if (sortedBrandsIds.length) {
+      return sortedBrandsIds;
+    }
+    return sortedIds;
+  };
+
+  const uniqSortedIds = _.uniq(handleIdsReturn());
 
   const reversedOnBooleanUniqSortedIds = reverse
     ? uniqSortedIds.reverse()

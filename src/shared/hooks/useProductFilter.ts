@@ -17,7 +17,7 @@ export const useProductFilter = () => {
     if (!productIsEmpty && (isError || error)) refetch();
   }, [isError, error, refetch]);
 
-  if (data === undefined) {
+  if (data === undefined || productIsEmpty) {
     return {
       data: [],
       isFetching: isFetching,
