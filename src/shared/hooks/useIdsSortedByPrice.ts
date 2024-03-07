@@ -71,7 +71,7 @@ export const useIdsSortedByPrice = (reverse = false) => {
     if (sortedProductsIds.length) {
       return sortedProductsIds;
     }
-    if (sortedBrandsIds.length) {
+    if (!filterIsEmpty && sortedBrandsIds.length) {
       return sortedBrandsIds;
     }
     return sortedIds;
