@@ -2,7 +2,8 @@ import {
   useGetIds,
   useGetPrices,
   useIsFetching,
-  useFilter,
+  useBrandFilter,
+  useProductFilter,
 } from 'shared/hooks';
 import { useAppSelector } from 'shared/api/redux';
 import _ from 'lodash';
@@ -23,15 +24,16 @@ export const useIdsSortedByPrice = (reverse = false) => {
   const { productsToShow } = useAppSelector((state) => state.products);
   const { data: idsData, isFetching: idsIsFetching } = useGetIds({});
   const { data: pricesData, isFetching: pricesIsFetching } = useGetPrices({});
-  const { data: filterData, isFetching: filterIsFetching } = useFilter(
-    { brand },
-    filterIsEmpty
-  );
+  const { data: brandFilterData, isFetching: brandFilterIsFetching } =
+    useBrandFilter({ brand }, filterIsEmpty);
+  const { data: productFilterData, isFetching: productFilterIsFetching } =
+    useProductFilter();
 
   const isFetching = useIsFetching([
     idsIsFetching,
     pricesIsFetching,
-    filterIsFetching,
+    brandFilterIsFetching,
+    productFilterIsFetching,
   ]);
 
   if (!idsData || !pricesData) {
@@ -46,26 +48,18 @@ export const useIdsSortedByPrice = (reverse = false) => {
     idsData.map((id, index) => [id, pricesData[index]])
   );
 
-  const sortedIds = [...idsData].sort((a, b) => {
-    const priceA = idToPriceMap.get(a);
-    const priceB = idToPriceMap.get(b);
-
-    if (priceA === undefined || priceB === undefined) {
-      return 0;
+  const sortedIds = (filterIsEmpty ? [...idsData] : [...brandFilterData]).sort(
+    (a, b) => {
+      const price1 = idToPriceMap.get(a);
+      const price2 = idToPriceMap.get(b);
+      if (price1 === undefined || price2 === undefined) {
+        return 0;
+      }
+      return price1 - price2;
     }
-    return priceA - priceB;
-  });
+  );
 
-  const sortedFilterIds = [...filterData].sort((id1, id2) => {
-    const price1 = idToPriceMap.get(id1);
-    const price2 = idToPriceMap.get(id2);
-    if (price1 === undefined || price2 === undefined) {
-      return 0;
-    }
-    return price1 - price2;
-  });
-
-  const uniqSortedIds = _.uniq(filterIsEmpty ? sortedIds : sortedFilterIds);
+  const uniqSortedIds = _.uniq(sortedIds);
 
   const reversedOnBooleanUniqSortedIds = reverse
     ? uniqSortedIds.reverse()

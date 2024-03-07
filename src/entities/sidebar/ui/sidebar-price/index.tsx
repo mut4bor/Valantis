@@ -1,5 +1,4 @@
 import styled from './style.module.scss';
-import { SidebarPriceProps } from './types';
 import {
   useGetPrices,
   useConvertStringToNumber,
@@ -7,10 +6,9 @@ import {
 } from 'shared/hooks';
 import { SidebarPriceInput } from '../sidebar-price-input';
 import _ from 'lodash';
+import { SidebarContainer } from '../sidebar-container';
 
-export function SidebarPrice(props: SidebarPriceProps) {
-  const { active } = props;
-
+export function SidebarPrice() {
   const { data, isFetching } = useGetPrices({});
 
   const uniqData = _.uniq(data);
@@ -26,12 +24,16 @@ export function SidebarPrice(props: SidebarPriceProps) {
 
   return (
     <>
-      {active && !isFetching && (
-        <div className={styled.container}>
+      <SidebarContainer
+        title={{
+          text: 'Цена',
+        }}
+      >
+        <div className={`${styled.container}`}>
           <SidebarPriceInput type="min" minmax={priceRange} />
           <SidebarPriceInput type="max" minmax={priceRange} />
         </div>
-      )}
+      </SidebarContainer>
     </>
   );
 }

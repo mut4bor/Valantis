@@ -1,0 +1,13 @@
+.children {
+  display: none;
+}
+
+.container {
+  transition: 0.3s;
+  height: fit-content;
+  &.active {
+    .children {
+      display: block;
+    }
+  }
+}

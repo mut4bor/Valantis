@@ -1,8 +1,12 @@
 import _ from 'lodash';
 import { useEffect } from 'react';
-import { FilterParams, useAppSelector, useFilterQuery } from 'shared/api/redux';
+import {
+  FilterBrandParams,
+  useAppSelector,
+  useFilterQuery,
+} from 'shared/api/redux';
 
-export const useFilter = (field: FilterParams, skip?: boolean) => {
+export const useBrandFilter = (field: FilterBrandParams, skip?: boolean) => {
   const { brand } = field;
   const { filterIsEmpty } = useAppSelector((state) => state.sidebar);
 

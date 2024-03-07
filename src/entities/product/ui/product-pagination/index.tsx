@@ -29,7 +29,7 @@ export function ProductPagination() {
       <PaginationCounter />
       <PaginationButton
         buttonType="increment"
-        disabled={paginationValue === paginationMaxValue}
+        disabled={paginationValue === paginationMaxValue || paginationDisabled}
         onClick={() => !paginationDisabled && dispatch(increment())}
       />
     </PaginationContainer>

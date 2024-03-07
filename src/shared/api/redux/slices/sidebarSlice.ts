@@ -1,5 +1,5 @@
-import { PayloadAction, ThunkDispatch, createSlice } from '@reduxjs/toolkit';
-import { FilterParams } from '../types';
+import { createSlice } from '@reduxjs/toolkit';
+import { FilterBrandParams } from '../types';
 
 const sidebarSlice = createSlice({
   name: 'sidebar',
@@ -7,7 +7,7 @@ const sidebarSlice = createSlice({
   initialState: {
     filter: {
       brand: undefined,
-    } as FilterParams,
+    } as FilterBrandParams,
     filterIsEmpty: true,
     priceRange: {
       priceMin: 0,

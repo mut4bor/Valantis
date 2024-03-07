@@ -14,7 +14,6 @@ const productsSlice = createSlice({
     },
     productsInput: {
       value: '',
-      productsisEmpty: true,
     },
   },
 

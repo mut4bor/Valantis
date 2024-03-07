@@ -1,7 +1,7 @@
 export * from './useAlphabeticalSort';
 export * from './useAscendingNumberSort';
+export * from './useBrandFilter';
 export * from './useConvertStringToNumber';
-export * from './useFilter';
 export * from './useGetFields';
 export * from './useGetIds';
 export * from './useGetItems';
@@ -9,3 +9,4 @@ export * from './useGetPrices';
 export * from './useIdsSortedByPrice';
 export * from './useIsFetching';
 export * from './useLockPageScroll';
+export * from './useProductFilter';

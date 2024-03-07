@@ -15,11 +15,14 @@ export interface ItemsResponse {
     }
   ];
 }
-export interface FilterParams {
-  id?: string | undefined;
-  brand?: string | null | undefined;
-  price?: number | undefined;
-  product?: string | undefined;
+export interface FilterBrandParams {
+  brand: string | null | undefined;
+}
+export interface FilterPriceParams {
+  price: number | undefined;
+}
+export interface FilterProductParams {
+  product: string | undefined;
 }
 export interface GetIdsParams {
   offset?: number;

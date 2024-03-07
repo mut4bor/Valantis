@@ -3,7 +3,9 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import md5 from 'md5';
 import {
   Response,
-  FilterParams,
+  FilterBrandParams,
+  FilterPriceParams,
+  FilterProductParams,
   GetIdsParams,
   PricesResponse,
   ItemsResponse,
@@ -29,7 +31,10 @@ const productApi = createApi({
   }),
 
   endpoints: (builder) => ({
-    filter: builder.query<Response, FilterParams>({
+    filter: builder.query<
+      Response,
+      FilterBrandParams | FilterPriceParams | FilterProductParams
+    >({
       query: (params) => ({
         url: '/',
         method: 'POST',

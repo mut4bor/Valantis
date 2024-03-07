@@ -1,7 +1,9 @@
 import { ProductCard } from '../product-card';
-import { useAppSelector } from 'shared/api/redux';
+import { useAppDispatch, useAppSelector } from 'shared/api/redux';
 import { useGetItems, useIdsSortedByPrice } from 'shared/hooks';
 import styled from './style.module.scss';
+import { paginationDisabledChanged } from 'shared/api/redux';
+import { useEffect } from 'react';
 
 export function ProductList() {
   const {
@@ -16,6 +18,13 @@ export function ProductList() {
   const { data: products, isFetching: productsIsFetching } = useGetItems({
     ids: ids,
   });
+
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    const isDisabled =
+      ids.length !== productsToShow || products.length !== productsToShow;
+    dispatch(paginationDisabledChanged(isDisabled));
+  }, [ids, products]);
 
   return (
     <ul className={styled.list}>

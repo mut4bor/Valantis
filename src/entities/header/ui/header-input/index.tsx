@@ -13,12 +13,11 @@ import { useDebouncedCallback } from 'use-debounce';
 export function HeaderInput() {
   const dispatch = useAppDispatch();
   const [showInputBoolean, setShowInputBoolean] = useState(false);
+  const [inputValue, setInputValue] = useState('');
 
   const toggleInput = () => {
     setShowInputBoolean(!showInputBoolean);
   };
-
-  const [inputValue, setInputValue] = useState('');
 
   useLockPageScroll(showInputBoolean);
 

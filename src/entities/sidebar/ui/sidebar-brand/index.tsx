@@ -2,9 +2,10 @@ import styled from './style.module.scss';
 import { SidebarBrandProps } from './types';
 import { useGetFields, useAlphabeticalSort } from 'shared/hooks';
 import { filtersChanged } from 'shared/api/redux/slices/sidebarSlice';
-import { useAppDispatch, useAppSelector } from 'shared/api/redux/hooks';
+import { useAppDispatch } from 'shared/api/redux/hooks';
 import { SidebarRadiobox } from '../sidebar-brand-radio';
 import _ from 'lodash';
+import { SidebarContainer } from '../sidebar-container';
 
 export function SidebarBrand(props: SidebarBrandProps) {
   const dispatch = useAppDispatch();
@@ -16,16 +17,20 @@ export function SidebarBrand(props: SidebarBrandProps) {
 
   const uniqData = _.uniq(brandData);
 
-  const data = useAlphabeticalSort(uniqData);
-
-  const radioboxDisabled = useAppSelector(
-    (state) => state.sidebar.radioboxDisabled
-  );
+  const brands = useAlphabeticalSort(uniqData);
 
   return (
     <>
-      {active && (
-        <div className={styled.container}>
+      <SidebarContainer
+        title={{
+          text: 'Производитель',
+        }}
+      >
+        <div
+          className={`${styled.container} ${
+            active && !brandIsFetching ? styled.visible : ''
+          }`}
+        >
           <>
             <SidebarRadiobox
               id="allBrands"
@@ -35,9 +40,9 @@ export function SidebarBrand(props: SidebarBrandProps) {
                 dispatch(filtersChanged({ brand: undefined }));
               }}
             />
-            {data.map((data, index) => {
+            {brands.map((brand, index) => {
               const isDataNotNull = () => {
-                return data === null ? '#' : data;
+                return brand === null ? '#' : brand;
               };
               return (
                 <SidebarRadiobox
@@ -45,14 +50,14 @@ export function SidebarBrand(props: SidebarBrandProps) {
                   id={isDataNotNull()}
                   title={isDataNotNull()}
                   onChange={() => {
-                    dispatch(filtersChanged({ brand: data }));
+                    dispatch(filtersChanged({ brand: brand }));
                   }}
                 />
               );
             })}
           </>
         </div>
-      )}
+      </SidebarContainer>
     </>
   );
 }
