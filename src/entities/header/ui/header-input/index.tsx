@@ -8,18 +8,24 @@ import { SVG } from 'shared/ui';
 import { HeaderInputToggle } from 'entities/header';
 import { useState } from 'react';
 import { useLockPageScroll } from 'shared/hooks';
+import { useDebouncedCallback } from 'use-debounce';
 
 export function HeaderInput() {
   const dispatch = useAppDispatch();
-  const { productsInput } = useAppSelector((state) => state.products);
-  const { value } = productsInput;
   const [showInputBoolean, setShowInputBoolean] = useState(false);
 
   const toggleInput = () => {
     setShowInputBoolean(!showInputBoolean);
   };
 
+  const [inputValue, setInputValue] = useState('');
+
   useLockPageScroll(showInputBoolean);
+
+  const debouncedValue = useDebouncedCallback(
+    () => dispatch(productsInputValueChanged(inputValue)),
+    1000
+  );
 
   return (
     <>
@@ -41,9 +47,10 @@ export function HeaderInput() {
             placeholder="Поиск"
             className={styled.input}
             type="text"
-            value={value}
+            value={inputValue}
             onChange={(event) => {
-              dispatch(productsInputValueChanged(event.target.value));
+              setInputValue(event.target.value);
+              debouncedValue();
             }}
           />
           <HeaderInputToggle type="cancel" onClick={toggleInput} />

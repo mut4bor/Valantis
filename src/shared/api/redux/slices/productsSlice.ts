@@ -1,5 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { Response } from '../types';
 
 const productsSlice = createSlice({
   name: 'products',
@@ -17,7 +16,6 @@ const productsSlice = createSlice({
       value: '',
       productsisEmpty: true,
     },
-    products: {} as Response,
   },
 
   reducers: {
