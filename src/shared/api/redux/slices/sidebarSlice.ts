@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { PayloadAction, ThunkDispatch, createSlice } from '@reduxjs/toolkit';
 import { FilterParams } from '../types';
 
 const sidebarSlice = createSlice({
@@ -10,9 +10,8 @@ const sidebarSlice = createSlice({
     } as FilterParams,
     filterIsEmpty: true,
     priceRange: {
-      priceMin: '',
-      priceMax: '',
-      priceIsEmpty: true,
+      priceMin: 0,
+      priceMax: Infinity,
     },
     isOpenedOnMobile: false,
     radioboxDisabled: true,
@@ -21,7 +20,8 @@ const sidebarSlice = createSlice({
   reducers: {
     filtersChanged(state, action) {
       state.filter = action.payload;
-      state.filterIsEmpty = JSON.stringify(action.payload) === '{}';
+      state.filterIsEmpty =
+        state.filter.brand === '' || state.filter.brand === undefined;
     },
     priceRangeChanged(state, action) {
       state.priceRange = action.payload;

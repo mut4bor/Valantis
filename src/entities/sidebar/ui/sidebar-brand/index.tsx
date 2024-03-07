@@ -32,8 +32,7 @@ export function SidebarBrand(props: SidebarBrandProps) {
               title="Все производители"
               defaultChecked
               onChange={() => {
-                !radioboxDisabled &&
-                  dispatch(filtersChanged({ brand: undefined }));
+                dispatch(filtersChanged({ brand: undefined }));
               }}
             />
             {data.map((data, index) => {

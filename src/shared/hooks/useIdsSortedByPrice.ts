@@ -15,6 +15,11 @@ export const useIdsSortedByPrice = (reverse = false) => {
   const { value: paginationValue } = useAppSelector(
     (state) => state.pagination
   );
+  const { priceMin, priceMax } = useAppSelector(
+    (state) => state.sidebar.priceRange
+  );
+  const priceIsEmpty = priceMin === 0 && priceMax === Infinity;
+
   const { productsToShow } = useAppSelector((state) => state.products);
   const { data: idsData, isFetching: idsIsFetching } = useGetIds({});
   const { data: pricesData, isFetching: pricesIsFetching } = useGetPrices({});
@@ -33,9 +38,7 @@ export const useIdsSortedByPrice = (reverse = false) => {
     return { data: [], isFetching };
   }
   if (idsData.length !== pricesData.length) {
-    console.log(
-      'idsData and pricesData are undefined or have different length!'
-    );
+    console.log('idsData and pricesData have different length!');
     return { data: [], isFetching };
   }
 
@@ -68,10 +71,22 @@ export const useIdsSortedByPrice = (reverse = false) => {
     ? uniqSortedIds.reverse()
     : uniqSortedIds;
 
+  const filteredIdsByPrice = priceIsEmpty
+    ? reversedOnBooleanUniqSortedIds
+    : reversedOnBooleanUniqSortedIds.filter((id) => {
+        const price = idToPriceMap.get(id);
+        if (price === undefined) {
+          return;
+        }
+        return price >= priceMin && price <= priceMax;
+      });
+
+  const uniqFilteredIdsByPrice = _.uniq(filteredIdsByPrice);
+
   const startPaginationIndex = (paginationValue - 1) * productsToShow;
   const endPaginationIndex = paginationValue * productsToShow;
 
-  const uniqSortedIdsSlice = reversedOnBooleanUniqSortedIds.slice(
+  const uniqSortedIdsSlice = uniqFilteredIdsByPrice.slice(
     startPaginationIndex,
     endPaginationIndex
   );
