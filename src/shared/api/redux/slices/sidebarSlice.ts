@@ -9,7 +9,11 @@ const sidebarSlice = createSlice({
       brand: undefined,
     } as FilterBrandParams,
     filterIsEmpty: true,
-    priceRange: {
+    priceInput: {
+      priceInputMin: 0,
+      priceInputMax: Infinity,
+    },
+    priceMinMax: {
       priceMin: 0,
       priceMax: Infinity,
     },
@@ -23,8 +27,11 @@ const sidebarSlice = createSlice({
       state.filterIsEmpty =
         state.filter.brand === '' || state.filter.brand === undefined;
     },
-    priceRangeChanged(state, action) {
-      state.priceRange = action.payload;
+    priceInputValueChanged(state, action) {
+      state.priceInput = action.payload;
+    },
+    priceMinMaxChanged(state, action) {
+      state.priceMinMax = action.payload;
     },
     radioboxDisabledChanged(state, action) {
       state.radioboxDisabled = action.payload;
@@ -36,7 +43,8 @@ const sidebarSlice = createSlice({
 });
 export const {
   filtersChanged,
-  priceRangeChanged,
+  priceInputValueChanged,
+  priceMinMaxChanged,
   radioboxDisabledChanged,
   isOpenedOnMobileChanged,
 } = sidebarSlice.actions;

@@ -1,29 +1,33 @@
-import { useAppDispatch, useAppSelector } from 'shared/api/redux/hooks';
 import styled from './style.module.scss';
 import { SidebarPriceInputProps } from './types';
-import { priceRangeChanged } from 'shared/api/redux/slices/sidebarSlice';
-import { useState } from 'react';
+import {
+  useAppDispatch,
+  useAppSelector,
+  paginationValueChanged,
+  priceInputValueChanged,
+} from 'shared/api/redux';
+import { useIdsSortedByPrice } from 'shared/hooks';
 import { useDebouncedCallback } from 'use-debounce';
-import { paginationValueChanged } from 'shared/api/redux';
+import { useState } from 'react';
 
 export function SidebarPriceInput(props: SidebarPriceInputProps) {
   const dispatch = useAppDispatch();
-  const { minmax, type } = props;
-  const { min, max } = minmax;
-  const { priceRange } = useAppSelector((state) => state.sidebar);
+  const { type } = props;
+  const { priceInput } = useAppSelector((state) => state.sidebar);
+  const { price } = useIdsSortedByPrice();
 
   const [value, setValue] = useState('');
 
-  const priceMin = value === '' ? 0 : parseFloat(value);
-  const priceMax = value === '' ? Infinity : parseFloat(value);
+  const priceInputMinValue = value === '' ? 0 : parseFloat(value);
+  const priceInputMaxValue = value === '' ? Infinity : parseFloat(value);
 
   const debouncedPrice = useDebouncedCallback(
     () =>
       dispatch(
-        priceRangeChanged(
+        priceInputValueChanged(
           type === 'min'
-            ? { ...priceRange, priceMin: priceMin }
-            : { ...priceRange, priceMax: priceMax }
+            ? { ...priceInput, priceMin: priceInputMinValue }
+            : { ...priceInput, priceMax: priceInputMaxValue }
         )
       ),
     1000
@@ -36,14 +40,14 @@ export function SidebarPriceInput(props: SidebarPriceInputProps) {
   };
 
   const useGetPlaceholder = () => {
-    return `${type === 'min' ? `От ${min}` : `До ${max}`} ₽`;
+    return `${type === 'min' ? `От ${price?.min}` : `До ${price?.max}`} ₽`;
   };
 
   return (
     <input
       type="number"
-      min={min}
-      max={max}
+      min={price?.min}
+      max={price?.max}
       className={styled.input}
       value={value}
       onChange={handleChange}

@@ -2,7 +2,7 @@ import styled from './style.module.scss';
 import { SidebarToggle } from '../sidebar-toggle';
 import {
   filtersChanged,
-  priceRangeChanged,
+  priceInputValueChanged,
   productsInputValueChanged,
   useAppDispatch,
 } from 'shared/api/redux';
@@ -18,7 +18,12 @@ export function SidebarHeader() {
         type="button"
         onClick={() => {
           dispatch(productsInputValueChanged(''));
-          dispatch(priceRangeChanged({ priceMin: 0, priceMax: Infinity }));
+          dispatch(
+            priceInputValueChanged({
+              priceInputMin: 0,
+              priceInputMax: Infinity,
+            })
+          );
           dispatch(filtersChanged({ brand: undefined }));
         }}
       >

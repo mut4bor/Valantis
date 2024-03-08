@@ -13,16 +13,18 @@ export const useIdsSortedByPrice = (
 ): {
   productIds: string[];
   isFetching: boolean;
+  price?: {
+    min: number | undefined;
+    max: number | undefined;
+  };
 } => {
+  const { paginationValue } = useAppSelector((state) => state.pagination);
   const {
     filter: { brand },
     filterIsEmpty,
+    priceInput: { priceInputMin, priceInputMax },
   } = useAppSelector((state) => state.sidebar);
-  const { paginationValue } = useAppSelector((state) => state.pagination);
-  const { priceMin, priceMax } = useAppSelector(
-    (state) => state.sidebar.priceRange
-  );
-  const priceIsEmpty = priceMin === 0 && priceMax === Infinity;
+  const priceIsEmpty = priceInputMin === 0 && priceInputMax === Infinity;
 
   const { productsToShow } = useAppSelector((state) => state.products);
   const { data: idsData, isFetching: idsIsFetching } = useGetIds({});
@@ -51,8 +53,8 @@ export const useIdsSortedByPrice = (
     idsData.map((id, index) => [id, pricesData[index]])
   );
 
-  const sortIdArray = (arr: string[]) => {
-    return [...arr].sort((a, b) => {
+  const sortIdArray = (arr: string[]): string[] => {
+    const sortedArr = [...arr].sort((a, b) => {
       const price1 = idToPriceMap.get(a);
       const price2 = idToPriceMap.get(b);
       if (price1 === undefined || price2 === undefined) {
@@ -60,24 +62,23 @@ export const useIdsSortedByPrice = (
       }
       return price1 - price2;
     });
+
+    return sortedArr;
   };
 
-  const sortedIds = sortIdArray(idsData);
-  const sortedBrandsIds = sortIdArray(brandFilterData);
-  const sortedProductsIds = sortedBrandsIds.length
-    ? sortIdArray(productFilterData).filter((id) =>
-        sortedBrandsIds.includes(id)
-      )
-    : sortIdArray(productFilterData);
-
   const handleIdsReturn = (): string[] => {
-    if (sortedProductsIds.length) {
-      return sortedProductsIds;
+    if (productFilterData.length) {
+      return brandFilterData.length
+        ? sortIdArray(productFilterData).filter((id) =>
+            brandFilterData.includes(id)
+          )
+        : sortIdArray(productFilterData);
     }
-    if (!filterIsEmpty && sortedBrandsIds.length) {
-      return sortedBrandsIds;
+    if (!filterIsEmpty && brandFilterData.length) {
+      const sortedBrands = sortIdArray(brandFilterData);
+      return sortedBrands;
     }
-    return sortedIds;
+    return sortIdArray(idsData);
   };
 
   const uniqSortedIds = _.uniq(handleIdsReturn());
@@ -93,7 +94,7 @@ export const useIdsSortedByPrice = (
         if (price === undefined) {
           return;
         }
-        return price >= priceMin && price <= priceMax;
+        return price >= priceInputMin && price <= priceInputMax;
       });
 
   const uniqFilteredIdsByPrice = _.uniq(filteredIdsByPrice);
@@ -106,5 +107,12 @@ export const useIdsSortedByPrice = (
     endPaginationIndex
   );
 
-  return { productIds: uniqSortedIdsSlice, isFetching };
+  return {
+    productIds: uniqSortedIdsSlice,
+    isFetching,
+    price: {
+      min: idToPriceMap.get(uniqSortedIds[0]),
+      max: idToPriceMap.get(uniqSortedIds[uniqSortedIds.length - 1]),
+    },
+  };
 };
