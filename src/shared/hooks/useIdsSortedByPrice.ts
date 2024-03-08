@@ -13,9 +13,7 @@ export const useIdsSortedByPrice = (reverse = false) => {
     filter: { brand },
     filterIsEmpty,
   } = useAppSelector((state) => state.sidebar);
-  const { value: paginationValue } = useAppSelector(
-    (state) => state.pagination
-  );
+  const { paginationValue } = useAppSelector((state) => state.pagination);
   const { priceMin, priceMax } = useAppSelector(
     (state) => state.sidebar.priceRange
   );

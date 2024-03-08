@@ -1,11 +1,15 @@
 import styled from './style.module.scss';
-import { SVG } from 'shared/ui';
-import { ProductSortRadio } from '../product-sort-radio';
-import { useAppSelector } from 'shared/api/redux';
+import { SVG, Radiobox } from 'shared/ui';
+import {
+  useAppDispatch,
+  useAppSelector,
+  setSelectedOption,
+} from 'shared/api/redux';
 
 import { useState, useEffect, useRef } from 'react';
 
 export function ProductSort() {
+  const dispatch = useAppDispatch();
   const [active, setActive] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
@@ -28,10 +32,6 @@ export function ProductSort() {
 
   const sortNameMapKeys = Object.keys(sortNameMap);
 
-  const handleListClosing = () => {
-    setActive(false);
-  };
-
   return (
     <div ref={ref} className={styled.container}>
       <label htmlFor="sortButton" className={styled.label}>
@@ -52,12 +52,18 @@ export function ProductSort() {
       </button>
       {active && (
         <ul className={styled.list}>
-          {sortNameMapKeys.map((data, index) => {
+          {sortNameMapKeys.map((sortname, index) => {
             return (
-              <ProductSortRadio
-                key={index}
-                onChange={handleListClosing}
-                id={data}
+              <Radiobox
+                key={sortname + index}
+                id={sortname}
+                title={sortNameMap[sortname]}
+                name="productSortRadio"
+                checked={selectedSort === sortname}
+                onChange={() => {
+                  setActive(false);
+                  dispatch(setSelectedOption(sortname));
+                }}
               />
             );
           })}

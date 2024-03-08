@@ -6,18 +6,16 @@ export function ProductCard(props: ProductCardProps) {
   const { data } = props;
   if (!data) {
     return (
-      <>
-        <li className={styled.container}>
-          {[...Array(4)].map((_, index) => (
-            <Skeleton
-              key={index}
-              variant="text"
-              animation="wave"
-              sx={{ fontSize: '1.4rem' }}
-            />
-          ))}
-        </li>
-      </>
+      <li className={styled.container}>
+        {[...Array(4)].map((_, index) => (
+          <Skeleton
+            key={index}
+            variant="text"
+            animation="wave"
+            sx={{ fontSize: '1.4rem' }}
+          />
+        ))}
+      </li>
     );
   }
   const { id, name, price, brand } = data;

@@ -1,7 +1,7 @@
-import { useAppSelector } from 'shared/api/redux/hooks';
 import styled from './style.module.scss';
+import { PaginationCounterProps } from './types';
 
-export function PaginationCounter() {
-  const paginationValue = useAppSelector((state) => state.pagination.value);
-  return <div className={styled.counter}>{paginationValue}</div>;
+export function PaginationCounter(props: PaginationCounterProps) {
+  const { value } = props;
+  return <div className={styled.counter}>{value}</div>;
 }

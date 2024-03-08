@@ -1,5 +1,4 @@
 import { useGetIdsQuery } from 'shared/api/redux/slices/apiSlice';
-import _ from 'lodash';
 import { useEffect } from 'react';
 import { GetIdsParams } from 'shared/api/redux';
 

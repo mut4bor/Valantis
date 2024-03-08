@@ -1,37 +1,35 @@
-import {
-  PaginationContainer,
-  PaginationButton,
-  PaginationCounter,
-} from 'shared/ui';
+import { Pagination } from 'shared/ui';
 import {
   useAppDispatch,
   useAppSelector,
-  increment,
-  decrement,
+  paginationValueChanged,
 } from 'shared/api/redux';
 
 export function ProductPagination() {
   const dispatch = useAppDispatch();
 
   const {
-    value: paginationValue,
-    minValue: paginationMinValue,
-    maxValue: paginationMaxValue,
+    paginationValue,
+    paginationMinValue,
+    paginationMaxValue,
     paginationDisabled,
   } = useAppSelector((state) => state.pagination);
+
   return (
-    <PaginationContainer>
-      <PaginationButton
-        buttonType="decrement"
-        disabled={paginationValue === paginationMinValue}
-        onClick={() => dispatch(decrement())}
-      />
-      <PaginationCounter />
-      <PaginationButton
-        buttonType="increment"
-        disabled={paginationValue === paginationMaxValue || paginationDisabled}
-        onClick={() => !paginationDisabled && dispatch(increment())}
-      />
-    </PaginationContainer>
+    <Pagination
+      counterValue={paginationValue}
+      incrementButton={{
+        incrementIsDisabled:
+          paginationValue === paginationMaxValue || paginationDisabled,
+        incrementOnClick: () =>
+          !paginationDisabled &&
+          dispatch(paginationValueChanged(paginationValue + 1)),
+      }}
+      decrementButton={{
+        decrementIsDisabled: paginationValue === paginationMinValue,
+        decrementOnClick: () =>
+          dispatch(paginationValueChanged(paginationValue - 1)),
+      }}
+    />
   );
 }

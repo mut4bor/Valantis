@@ -3,9 +3,9 @@ import { SidebarBrandProps } from './types';
 import { useGetFields, useAlphabeticalSort } from 'shared/hooks';
 import { filtersChanged } from 'shared/api/redux/slices/sidebarSlice';
 import { useAppDispatch } from 'shared/api/redux/hooks';
-import { SidebarRadiobox } from '../sidebar-brand-radio';
 import _ from 'lodash';
 import { SidebarContainer } from '../sidebar-container';
+import { Radiobox } from 'shared/ui';
 
 export function SidebarBrand(props: SidebarBrandProps) {
   const dispatch = useAppDispatch();
@@ -20,44 +20,44 @@ export function SidebarBrand(props: SidebarBrandProps) {
   const brands = useAlphabeticalSort(uniqData);
 
   return (
-    <>
-      <SidebarContainer
-        title={{
-          text: 'Производитель',
-        }}
+    <SidebarContainer
+      title={{
+        text: 'Производитель',
+      }}
+    >
+      <div
+        className={`${styled.container} ${
+          active && !brandIsFetching ? styled.visible : ''
+        }`}
       >
-        <div
-          className={`${styled.container} ${
-            active && !brandIsFetching ? styled.visible : ''
-          }`}
-        >
-          <>
-            <SidebarRadiobox
-              id="allBrands"
-              title="Все производители"
-              defaultChecked
-              onChange={() => {
-                dispatch(filtersChanged({ brand: undefined }));
-              }}
-            />
-            {brands.map((brand, index) => {
-              const isDataNotNull = () => {
-                return brand === null ? '#' : brand;
-              };
-              return (
-                <SidebarRadiobox
-                  key={index}
-                  id={isDataNotNull()}
-                  title={isDataNotNull()}
-                  onChange={() => {
-                    dispatch(filtersChanged({ brand: brand }));
-                  }}
-                />
-              );
-            })}
-          </>
-        </div>
-      </SidebarContainer>
-    </>
+        <>
+          <Radiobox
+            defaultChecked
+            id="allBrands"
+            title="Все производители"
+            name="brandRadio"
+            onChange={() => {
+              dispatch(filtersChanged({ brand: undefined }));
+            }}
+          />
+          {brands.map((brand, index) => {
+            const isDataNotNull = () => {
+              return brand === null ? '#' : brand;
+            };
+            return (
+              <Radiobox
+                key={isDataNotNull() + index}
+                id={isDataNotNull()}
+                title={isDataNotNull()}
+                name="brandRadio"
+                onChange={() => {
+                  dispatch(filtersChanged({ brand: brand }));
+                }}
+              />
+            );
+          })}
+        </>
+      </div>
+    </SidebarContainer>
   );
 }

@@ -9,7 +9,7 @@ import _ from 'lodash';
 import { SidebarContainer } from '../sidebar-container';
 
 export function SidebarPrice() {
-  const { data, isFetching } = useGetPrices({});
+  const { data } = useGetPrices({});
 
   const uniqData = _.uniq(data);
 

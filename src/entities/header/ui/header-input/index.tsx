@@ -1,8 +1,4 @@
-import {
-  productsInputValueChanged,
-  useAppDispatch,
-  useAppSelector,
-} from 'shared/api/redux';
+import { productsInputValueChanged, useAppDispatch } from 'shared/api/redux';
 import styled from './style.module.scss';
 import { SVG } from 'shared/ui';
 import { HeaderInputToggle } from 'entities/header';

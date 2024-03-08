@@ -1,14 +1,15 @@
 import styled from './style.module.scss';
-import { SidebarRadioboxProps } from './types';
+import { RadioboxProps } from './types';
 
-export function SidebarRadiobox(props: SidebarRadioboxProps) {
-  const { onChange, title, id, defaultChecked } = props;
+export function Radiobox(props: RadioboxProps) {
+  const { onChange, title, id, defaultChecked, name, checked } = props;
   return (
     <>
       <input
         id={id}
-        name="brandRadio"
+        name={name}
         defaultChecked={defaultChecked}
+        checked={checked}
         className={styled.checkbox}
         type="radio"
         onChange={onChange}

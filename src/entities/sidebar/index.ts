@@ -1,5 +1,4 @@
 export * from './ui/sidebar-brand';
-export * from './ui/sidebar-brand-radio';
 export * from './ui/sidebar-container';
 export * from './ui/sidebar-header';
 export * from './ui/index';
