@@ -1,4 +1,8 @@
-import { productsInputValueChanged, useAppDispatch } from 'shared/api/redux';
+import {
+  paginationValueChanged,
+  productsInputValueChanged,
+  useAppDispatch,
+} from 'shared/api/redux';
 import styled from './style.module.scss';
 import { SVG } from 'shared/ui';
 import { HeaderInputToggle } from 'entities/header';
@@ -17,10 +21,9 @@ export function HeaderInput() {
 
   useLockPageScroll(showInputBoolean);
 
-  const debouncedValue = useDebouncedCallback(
-    () => dispatch(productsInputValueChanged(inputValue)),
-    1000
-  );
+  const debouncedValue = useDebouncedCallback(() => {
+    dispatch(productsInputValueChanged(inputValue));
+  }, 1000);
 
   return (
     <>
@@ -46,6 +49,7 @@ export function HeaderInput() {
             onChange={(event) => {
               setInputValue(event.target.value);
               debouncedValue();
+              dispatch(paginationValueChanged(1));
             }}
           />
           <HeaderInputToggle type="cancel" onClick={toggleInput} />

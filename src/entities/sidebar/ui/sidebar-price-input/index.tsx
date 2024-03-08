@@ -4,6 +4,7 @@ import { SidebarPriceInputProps } from './types';
 import { priceRangeChanged } from 'shared/api/redux/slices/sidebarSlice';
 import { useState } from 'react';
 import { useDebouncedCallback } from 'use-debounce';
+import { paginationValueChanged } from 'shared/api/redux';
 
 export function SidebarPriceInput(props: SidebarPriceInputProps) {
   const dispatch = useAppDispatch();
@@ -31,6 +32,7 @@ export function SidebarPriceInput(props: SidebarPriceInputProps) {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setValue(event.target.value);
     debouncedPrice();
+    dispatch(paginationValueChanged(1));
   };
 
   const useGetPlaceholder = () => {
