@@ -12,7 +12,7 @@ Hi there! My name is Matvey Molchanov! This is a Valantis repo for a job test ta
 ## About the app
 
 This app is a jewelry store, where you can filter products by price and vendor, sort them by price increase and decrease. Also you can filter products by its name via search bar.
-App has fully adaptive design, works properly on mobiles, tablets and PCs
+App based on a Feature Sliced Design, has fully adaptive design, works properly on mobiles, tablets and PCs
 
 ## Branches
 
@@ -23,7 +23,6 @@ This project has 2 branches:
 
 ## Technology Stack
 
-- Feature Sliced Design
 - Typescript
 - React
 - Redux ToolKit
