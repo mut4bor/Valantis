@@ -6,7 +6,7 @@ export function HeaderInputToggle(props: HeaderInputToggleProps) {
   const { onClick, type } = props;
   return (
     <button
-      title={type === 'search' ? 'Поиск' : 'Отмена'}
+      title={type === 'search' ? 'Поиск' : 'Закрыть'}
       className={styled.button}
       type="button"
       onClick={onClick}
@@ -18,7 +18,7 @@ export function HeaderInputToggle(props: HeaderInputToggleProps) {
           useClassName={styled.mobileSearchUse}
         />
       ) : (
-        <p className={styled.cancel}>Отмена</p>
+        <p className={styled.cancel}>Закрыть</p>
       )}
     </button>
   );
