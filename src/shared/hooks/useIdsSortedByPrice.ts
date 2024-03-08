@@ -8,7 +8,12 @@ import {
 import { useAppSelector } from 'shared/api/redux';
 import _ from 'lodash';
 
-export const useIdsSortedByPrice = (reverse = false) => {
+export const useIdsSortedByPrice = (
+  reverse = false
+): {
+  productIds: string[];
+  isFetching: boolean;
+} => {
   const {
     filter: { brand },
     filterIsEmpty,
@@ -35,11 +40,11 @@ export const useIdsSortedByPrice = (reverse = false) => {
   ]);
 
   if (!idsData || !pricesData) {
-    return { data: [], isFetching };
+    return { productIds: [], isFetching };
   }
   if (idsData.length !== pricesData.length) {
-    console.log('idsData and pricesData have different length!');
-    return { data: [], isFetching };
+    console.error('idsData and pricesData have different length!');
+    return { productIds: [], isFetching };
   }
 
   const idToPriceMap = new Map(
@@ -101,5 +106,5 @@ export const useIdsSortedByPrice = (reverse = false) => {
     endPaginationIndex
   );
 
-  return { data: uniqSortedIdsSlice, isFetching };
+  return { productIds: uniqSortedIdsSlice, isFetching };
 };

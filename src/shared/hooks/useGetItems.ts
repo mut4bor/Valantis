@@ -14,7 +14,7 @@ export const useGetItems = (ids: GetItemsParams, skip?: boolean) => {
 
   const filteredItemsData = _.uniqBy(data?.result, (itemData) => itemData.id);
   return {
-    data: filteredItemsData,
+    items: filteredItemsData,
     isFetching: isFetching,
   };
 };

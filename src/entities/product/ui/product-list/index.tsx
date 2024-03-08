@@ -16,19 +16,20 @@ export function ProductList() {
     productsSort: { selectedSort },
   } = useAppSelector((state) => state.products);
 
-  const { data: ids, isFetching: idsIsFetching } = useIdsSortedByPrice(
+  const { productIds, isFetching: idsIsFetching } = useIdsSortedByPrice(
     selectedSort === 'priceHighToLow'
   );
 
-  const { data: products, isFetching: productsIsFetching } = useGetItems({
-    ids: ids,
+  const { items: products, isFetching: productsIsFetching } = useGetItems({
+    ids: productIds,
   });
 
   useEffect(() => {
     const isDisabled =
-      ids.length !== productsToShow || products.length !== productsToShow;
+      productIds.length !== productsToShow ||
+      products.length !== productsToShow;
     dispatch(paginationDisabledChanged(isDisabled));
-  }, [ids, products]);
+  }, [productIds, products]);
 
   return (
     <ul className={styled.list}>

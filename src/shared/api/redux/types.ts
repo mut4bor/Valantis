@@ -6,14 +6,12 @@ export interface PricesResponse {
 }
 
 export interface ItemsResponse {
-  result: [
-    {
-      brand: string | null;
-      id: string;
-      price: number;
-      product: string;
-    }
-  ];
+  result: {
+    brand: string | null;
+    id: string;
+    price: number;
+    product: string;
+  }[];
 }
 export interface FilterBrandParams {
   brand: string | null | undefined;
